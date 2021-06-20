@@ -9,6 +9,8 @@ Howard Hall
 <br>
 Haseeb Ikram
 <br>
+Alexander Pugh
+<br>
 
 <h2>INTRODUCTION</h2>
 Takes input from the user about their pool chemical levels and provides guidance to improve said levels with through various methods in order to maintain a healthy swimming environment.
