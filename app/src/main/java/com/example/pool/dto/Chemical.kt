@@ -14,21 +14,23 @@ package com.example.pool.dto
  */
 class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: Float, val ozPerGallon: Float) {
     /**
-     * @param currentAmount is the current level of a certain chemical
-     * @return amount of chemical that needs to be added, or zero for none. a negative number could
-     * potentially represent having too much of a chemical, and needing to avoid adding it
+     * @param poolSize is the current level of a certain chemical
+     * @return amount of chemical that needs to be added, or zero for none. a negative number
+     * represents having too much of a chemical, and needing to avoid adding it
      */
-    fun calculateAmountNeeded(currentAmount: Float): Float {
-        //TODO
+    var amountNeeded: Float = 0F;
+    fun calculateAmountNeeded(poolSize: Float): Float {
+        amountNeeded = ozPerGallon * poolSize
+        return amountNeeded
     }
 
     /**
-     * @param ozChemicalAdded should be the value returned by calculateAmountNeeded, and the amount of a
-     * certain chemical to be added
-     * @return the number of hours in which a pool will be unsafe to swim
+     * @param poolSize should be the value returned by calculateAmountNeeded, and the amount of a
+     * certain chemical to be removed
+     * @return the amount of chemicals to add in order to neutralize an excess level
      */
-    fun getHoursNoSwim(ozChemicalAdded: Float): Float {
-        //TODO
+    fun calculateAmountToRemove(poolSize: Float): Float {
+        return (-amountNeeded) * poolSize
     }
 
     /**
@@ -38,13 +40,14 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
     @Override
     override fun toString(): String {
         //may need to be modified for units
-        var safeToSwim = "safe"
         if (this.hoursCantSwim > 0 ) {
-            safeToSwim = "unsafe"
+            return this.name + "is a chemical with an acceptable range of " + this.okRange[0] + " to " +
+                    this.okRange[1] + ", and is unsafe for pool goers"+ hoursCantSwim +" after use."
         }
-        return this.name + "is a chemical with an acceptable range of " + this.okRange[0] + " to " +
-                this.okRange[1] + ", and is " + safeToSwim + " for pool goers after use."
+        else
+        {
+            return this.name + "is a chemical with an acceptable range of " + this.okRange[0] + " to " +
+            this.okRange[1] + ", and is safe for pool goers."
+        }
     }
-
-
 }
