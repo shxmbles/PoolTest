@@ -40,14 +40,18 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
     @Override
     override fun toString(): String {
         //may need to be modified for units
+        var hour = "hours"
+        if (this.hoursCantSwim == 1F) {
+            hour = "hour"
+        }
         if (this.hoursCantSwim > 0 ) {
-            return this.name + "is a chemical with an acceptable range of " + this.okRange[0] + " to " +
-                    this.okRange[1] + ", and is unsafe for pool goers"+ hoursCantSwim +" after use."
+            return this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
+                    this.okRange[1].toString() + ", and is unsafe for pool goers"+ hoursCantSwim + hour + " after use."
         }
         else
         {
-            return this.name + "is a chemical with an acceptable range of " + this.okRange[0] + " to " +
-            this.okRange[1] + ", and is safe for pool goers."
+            return this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
+            this.okRange[1].toString() + ", and is safe for pool goers."
         }
     }
 }
