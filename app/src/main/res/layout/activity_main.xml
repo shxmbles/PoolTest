@@ -4,25 +4,30 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtPool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Pool"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/txtChlorine"
-        android:layout_width="392dp"
+        android:id="@+id/viewChlorine"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_below="@id/txtPool"
+        android:layout_margin="5dp"
         android:background="@drawable/drawableback"
         android:text="Chlorine"
-        android:paddingLeft="10dp"
-        />
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/txtChlorine"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewChlorine"
+        android:backgroundTint="@color/teal_200"
+        android:background="@drawable/drawableback"
+        android:layout_marginLeft="5dp"
+        android:inputType="phone"
+        ></EditText>
 </RelativeLayout>
