@@ -12,13 +12,18 @@ package com.example.pool.dto
  * of measure
  * @constructor creates a chemical based on supplied properties
  */
-class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: Float, val ozPerGallon: Float) {
+class Chemical(
+    val name: String,
+    val okRange: Array<Float>,
+    val hoursCantSwim: Float,
+    val ozPerGallon: Float
+    ) {
     /**
      * @param poolSize is the current level of a certain chemical
      * @return amount of chemical that needs to be added, or zero for none. a negative number
      * represents having too much of a chemical, and needing to avoid adding it
      */
-    var amountNeeded: Float = 0F;
+    var amountNeeded: Float = 0F
     fun calculateAmountNeeded(poolSize: Float): Float {
         amountNeeded = ozPerGallon * poolSize
         return amountNeeded
