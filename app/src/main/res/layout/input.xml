@@ -4,15 +4,15 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/PoolText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Pool"
+        android:text="@string/PoolText"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="392dp"
+        android:id="@+id/ChlorineInput"
+        android:layout_width="402dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -22,7 +22,6 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/drawableback"
-        android:text="Chlorine"
         android:paddingLeft="10dp"
-        />
+        android:text="@string/ChlorineHint" />
 </RelativeLayout>
