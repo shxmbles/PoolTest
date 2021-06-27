@@ -44,8 +44,8 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
         if (this.hoursCantSwim == 1F) {
             hour = "hour"
         }
-        if (this.hoursCantSwim > 0 ) {
-            return this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
+        return if (this.hoursCantSwim > 0 ) {
+             this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
                     this.okRange[1].toString() + ", and is unsafe for pool goers"+ hoursCantSwim + hour + " after use."
         }
         else
