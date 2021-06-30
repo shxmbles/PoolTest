@@ -1,0 +1,84 @@
+[
+  {
+    "_comment":"For the sake that you may need to add alot of data into this project it may be better to store your data in a Json file because its easier to change and use across the project. I made this quickly using Gson",
+
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "example",
+    "okRange": [
+      1.0,
+      5.0
+  ],
+  "ozPerGallon": 0.005
+},
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 8.0,
+    "name": "chl",
+    "okRange": [
+      1.0,
+      5.0
+    ],
+    "ozPerGallon": 0.005
+  },
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "alk",
+    "okRange": [
+      80.0,
+      120.0
+    ],
+    "ozPerGallon": 0.005
+  },
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "cal",
+    "okRange": [
+      200.0,
+      300.0
+    ],
+    "ozPerGallon": 0.005
+  },
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "pH",
+    "okRange": [
+      7.4,
+      7.6
+    ],
+    "ozPerGallon": 0.005
+  },
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "cya",
+    "okRange": [
+      30.0,
+      100.0
+    ],
+    "ozPerGallon": 0.005
+  },
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "tds",
+    "okRange": [
+      0.0,
+      1500.0
+    ],
+    "ozPerGallon": 0.005
+  },
+  {
+    "amountNeeded": 0.0,
+    "hoursCantSwim": 0.0,
+    "name": "pho",
+    "okRange": [
+      0.0,
+      100.0
+    ],
+    "ozPerGallon": 0.005
+  }
+]
