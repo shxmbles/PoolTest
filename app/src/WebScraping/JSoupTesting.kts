@@ -1,5 +1,7 @@
+//Variable for website main link
 val wiki = "https://en.wikipedia.org"
 
+// Connecting Jsoup to sample site
 fun JSoupTesting() {
     val doc = Jsoup.connect("$wiki/wiki/List_of_films_with_a_100%25_rating_on_Rotten_Tomatoes").get()    // <1>
     doc.select(".wikitable:first-of-type tr td:first-of-type a")    // <2>
@@ -9,6 +11,7 @@ fun JSoupTesting() {
             .filter { it != null }
             .forEach { println(it) }
 }
+//Sets the class for the data recieved
 class Movie {
     var title: String? = ""
     var directedBy: String = ""
@@ -23,7 +26,7 @@ class Movie {
     }
 
 }
-
+//Pulls the movie data from the page and creates an object for it
 fun extractMovieData(url: String): Movie? { // <1>
     val doc: Document
     try {
