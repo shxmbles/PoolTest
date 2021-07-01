@@ -33,7 +33,9 @@ android {
 }
 
 dependencies {
-
+    compile 'com.android.support:cardview:cardview-v7:26.0.1'
+    implementation 'andoridx.recyclerview:recylcerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
