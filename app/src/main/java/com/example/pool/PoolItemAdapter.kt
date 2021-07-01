@@ -1,5 +1,6 @@
 package com.example.pool
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.pool_status_item.view.*
 
 
 
-class PoolItemAdapter: RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>() {
+class PoolItemAdapter(private val poolList: List<poolStatusItem>): RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>() {
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -37,7 +38,9 @@ class PoolItemAdapter: RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>(
      * @see .onBindViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoolItemViewHolder {
-        TODO("Not yet implemented")
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.pool_status_item,
+        parent, false)
+        return PoolItemViewHolder(itemView)
     }
 
     /**
@@ -62,7 +65,11 @@ class PoolItemAdapter: RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>(
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: PoolItemViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = poolList[position]
+        holder.imageView.setImageResource(currentItem.imageResource)
+        holder.titleView.text = currentItem.Title
+        holder.description.text = currentItem.description
+        holder.status.text = currentItem.poolStatus
     }
 
     /**
@@ -70,14 +77,12 @@ class PoolItemAdapter: RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>(
      *
      * @return The total number of items in this adapter.
      */
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount() = poolList.size
 
     class PoolItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.icon_view
         val titleView: TextView = itemView.title_view1
         val description: TextView = itemView.description_1
-        val status: EditText = itemView.pool_fill_in
+        var status: TextView = itemView.pool_fill_in
     }
 }
