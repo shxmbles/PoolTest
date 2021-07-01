@@ -34,8 +34,7 @@ class ProductDataIntegrationTest {
     fun callForChlorine_returnsChlorine() {
         givenAFeedOfProductDataAreAvailable()
         whenCallForChlorine()
-        thenResultContainsEasternRedbud()
-        assertTrue("yes"=="yes")
+        thenResultContainsChlorine()
     }
 
 
@@ -48,7 +47,7 @@ class ProductDataIntegrationTest {
         mvm.fetchProduct(myASIN="B00PZZFG0O");
     }
 
-    private fun thenResultContainsEasternRedbud() {
+    private fun thenResultContainsChlorine() {
         var chlorineCalled = false;
         mvm.product.observeForever {
             assertNotNull(it)
