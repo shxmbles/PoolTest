@@ -10,7 +10,12 @@ package com.example.pool.dto
  * @property chlBoostPerGallon, amount of chlorine needed to boost the algecide for algae elimination
  * @constructor creates a chemical based on supplied properties
  */
-class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, val chlBoostPerGallon: Float) {
+class Algae(
+    val type: String,
+    val hoursCantSwim: Float,
+    val ozPerGallon: Float,
+    val chlBoostPerGallon: Float
+    ) {
     /**
      * @param poolGallonSize is the size of the pool
      * @return amount of algecide that needs to be added.
