@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class ProductService {
     /**
-     * @return countries from JSON data in MutableLiveData array list.
+     * @return product from JSON data in MutableLiveData array list.
      */
     fun fetchProduct(myASIN: String): MutableLiveData<Product> {
         var _product = MutableLiveData<Product>()
