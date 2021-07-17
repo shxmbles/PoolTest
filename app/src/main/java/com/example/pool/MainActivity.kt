@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             ozPerGallon = .005F)
     val phosphates = Chemical(name= "pho", okRange = arrayOf(0F, 100F), hoursCantSwim = 0F,
             ozPerGallon = .005F)
+    val bromine = Chemical(name= "bro", okRange = arrayOf(0F, 100F), hoursCantSwim = 0F,
+            ozPerGallon = .005F)
     val gAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F)
     val yAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F)
     val bAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F)
