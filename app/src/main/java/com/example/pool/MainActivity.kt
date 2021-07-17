@@ -12,8 +12,6 @@ class MainActivity : AppCompatActivity() {
 
 
     //each chemical can be created here using the chemical class
-    val exampleChemical = Chemical(name= "example", okRange = arrayOf(1F, 5F), hoursCantSwim = 0F,
-        ozPerGallon = .005F)
     val chlorine = Chemical(name= "chl", okRange = arrayOf(1F, 5F), hoursCantSwim = 8F,
             ozPerGallon = .005F)
     val alkalinity = Chemical(name= "alk", okRange = arrayOf(80F, 120F), hoursCantSwim = 0F,
@@ -52,6 +50,45 @@ class MainActivity : AppCompatActivity() {
         list += item
 
         return list
+    }
+
+    /**
+     * @param priceLevel is a value 0 (low), 1 (medium), or 2 (high) which corresponds to an index in the chemical arrays
+     * @param productType is the chemical name ("chlorine", "cyanuricAcid", "phIncrease", "phDecrease", "algaecide", "calcium", "sodiumBicarbonate")
+     * @return the asin of the product which we will fetch from the amazon api
+     */
+    private fun getASIN(priceLevel: Int, productType: String) : String {
+        //5 lbs
+        var chlorineList = arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV")
+        //5 lbs
+        var cyanuricAcidList = arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX")
+        //4 lbs
+        var phIncreaseList  = arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K")
+        //5 lbs for most
+        var phDecreaseList = arrayOf("B084GPS6KR", "B077715Y9L", "B07YZPNWDL")
+        //sizing wasn't listed for all
+        var algaecideList = arrayOf("43128CLX", "B0049VQ89S", "B002WKJAYS")
+        //4 lbs
+        var calciumList = arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B")
+        //5 lbs
+        var sodiumBicarbonateList = arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK")
+
+        if (productType.equals("chlorine"))
+            return chlorineList[priceLevel]
+        else if (productType.equals("cyanuricAcid"))
+            return cyanuricAcidList[priceLevel]
+        else if (productType.equals("phIncrease"))
+            return phIncreaseList[priceLevel]
+        else if (productType.equals("phDecrease"))
+            return phDecreaseList[priceLevel]
+        else if (productType.equals("algaecide"))
+            return algaecideList[priceLevel]
+        else if (productType.equals("calcium"))
+            return calciumList[priceLevel]
+        else if (productType.equals("sodiumBicarbonate"))
+            return sodiumBicarbonateList[priceLevel]
+        else
+            return ""
     }
 
 }
