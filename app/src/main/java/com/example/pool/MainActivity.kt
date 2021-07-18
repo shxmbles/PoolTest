@@ -12,24 +12,30 @@ class MainActivity : AppCompatActivity() {
 
 
     //each chemical can be created here using the chemical class
-    val chlorine = Chemical(name= "chl", okRange = arrayOf(1F, 5F), hoursCantSwim = 8F,
-            ozPerGallon = .005F)
-    val alkalinity = Chemical(name= "alk", okRange = arrayOf(80F, 120F), hoursCantSwim = 0F,
-            ozPerGallon = .005F)
-    val calciumHardness = Chemical(name= "cal", okRange = arrayOf(200F, 300F), hoursCantSwim = 0F,
-            ozPerGallon = .005F)
-    val pH = Chemical(name= "pH", okRange = arrayOf(7.4F, 7.6F), hoursCantSwim = 0F,
-            ozPerGallon = .005F)
-    val cyanuricAcid = Chemical(name= "cya", okRange = arrayOf(30F, 100F), hoursCantSwim = 0F,
-            ozPerGallon = .005F)
-    val totalDissolvedSolids = Chemical(name= "tds", okRange = arrayOf(0F, 1500F), hoursCantSwim = 0F,
-            ozPerGallon = .005F)
-    val phosphates = Chemical(name= "pho", okRange = arrayOf(0F, 100F), hoursCantSwim = 0F,
-            ozPerGallon = .005F)
-    val gAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F)
-    val yAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F)
-    val bAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F)
+    val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
+            ozPerGallon= .005F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
+    val alkalinity = Chemical(name= "alk", okRange= arrayOf(80F, 120F), hoursCantSwim= 0F,
+            ozPerGallon= .005F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
+
+    val calciumHardness = Chemical(name= "cal", okRange= arrayOf(200F, 300F), hoursCantSwim= 0F,
+            ozPerGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
+
+    val pH = Chemical(name= "pH", okRange= arrayOf(7.4F, 7.6F), hoursCantSwim= 0F,
+            ozPerGallon= .005F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
+
+    val cyanuricAcid = Chemical(name= "cya", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
+            ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
+
+    val totalDissolvedSolids = Chemical(name= "tds", okRange= arrayOf(0F, 1500F), hoursCantSwim= 0F,
+            ozPerGallon= .005F, ASINTiers= arrayOf())
+
+    val phosphates = Chemical(name= "pho", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
+            ozPerGallon= .005F, ASINTiers= arrayOf())
+
+    val gAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
+    val yAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
+    val bAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B00BGNLPCW")
     val myProduct = MainViewModel().fetchProduct(myASIN="B00PZZFG0O")
 
 
@@ -53,40 +59,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * @param priceLevel is a value 0 (low), 1 (medium), or 2 (high) which corresponds to an index in the chemical arrays
+     * @param priceLevel is a value 0 (low), 1 (medium), or 2 (high) which corresponds to an index in the chemical arrays. In the
+     * case of algaecides, priceLevel will refer to the specific type of algae detected. The index for algae reads as thus: 0 (green), 1 (yellow)
+     * or 2 (black.)
      * @param productType is the chemical name ("chlorine", "cyanuricAcid", "phIncrease", "phDecrease", "algaecide", "calcium", "sodiumBicarbonate")
      * @return the asin of the product which we will fetch from the amazon api
      */
     private fun getASIN(priceLevel: Int, productType: String) : String {
+        if (productType=="chlorine")
+            return chlorine.ASINTiers[priceLevel]
         //5 lbs
-        var chlorineList = arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV")
-        //5 lbs
-        var cyanuricAcidList = arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX")
+        else if (productType=="cyanuricAcid")
+            return cyanuricAcid.ASINTiers[priceLevel]
         //4 lbs
-        var phIncreaseList  = arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K")
+        else if (productType=="phIncrease")
+            return pH.ASINTiers[priceLevel]
         //5 lbs for most
-        var phDecreaseList = arrayOf("B084GPS6KR", "B077715Y9L", "B07YZPNWDL")
-        //sizing wasn't listed for all
-        var algaecideList = arrayOf("43128CLX", "B0049VQ89S", "B002WKJAYS")
+        else if (productType=="phDecrease")
+            return pH.ASINTiers[priceLevel+3]
+        //1 qt
+        else if (productType=="greenAlgaecide")
+            return gAlgae.ASINTag
+        //1 qt
+        else if (productType=="yellowAlgaecide")
+            return yAlgae.ASINTag
+        //1 qt
+        else if (productType=="blackAlgaecide")
+            return bAlgae.ASINTag
         //4 lbs
-        var calciumList = arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B")
+        else if (productType=="calcium")
+            return calciumHardness.ASINTiers[priceLevel]
         //5 lbs
-        var sodiumBicarbonateList = arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK")
-
-        if (productType.equals("chlorine"))
-            return chlorineList[priceLevel]
-        else if (productType.equals("cyanuricAcid"))
-            return cyanuricAcidList[priceLevel]
-        else if (productType.equals("phIncrease"))
-            return phIncreaseList[priceLevel]
-        else if (productType.equals("phDecrease"))
-            return phDecreaseList[priceLevel]
-        else if (productType.equals("algaecide"))
-            return algaecideList[priceLevel]
-        else if (productType.equals("calcium"))
-            return calciumList[priceLevel]
-        else if (productType.equals("sodiumBicarbonate"))
-            return sodiumBicarbonateList[priceLevel]
+        else if (productType=="sodiumBicarbonate")
+            return alkalinity.ASINTiers[priceLevel]
         else
             return ""
     }
