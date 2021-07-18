@@ -35,14 +35,6 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
     }
 
     /**
-     * @param priceRange should be what the customer is willing to pay for chemicals
-     * @param brand should be the customers preferred brand
-     * @return ASIN code corresponding to a product that meets the customer's specs
-     */
-    fun chemicalTier(priceRange: Array<Float>, brand: String) {
-        TODO()
-    }
-    /**
      * @override toString function
      * @return chemical name and a small summary about the chemical
      */
