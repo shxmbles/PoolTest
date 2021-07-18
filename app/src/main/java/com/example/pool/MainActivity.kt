@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     val cyanuricAcid = Chemical(name= "cya", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
             ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
-
+    
     val totalDissolvedSolids = Chemical(name= "tds", okRange= arrayOf(0F, 1500F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf())
+            ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
     val phosphates = Chemical(name= "pho", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf())
+            ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
     val gAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
     val yAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
