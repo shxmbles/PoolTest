@@ -14,6 +14,8 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
     //create a test Pool object. In the future this will be created from user input
     val testPool = Pool("pool1", 15000F)
+    //set this pool object to be the active pool
+    val activePool = testPool
 
     //each chemical can be created here using the chemical class
     val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
