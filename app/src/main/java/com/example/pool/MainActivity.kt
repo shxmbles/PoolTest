@@ -119,21 +119,22 @@ class MainActivity : AppCompatActivity() {
         val recommended = chemical.ozPerGallon
         val name = chemical.name
         val hoursNotSafe = chemical.hoursCantSwim
-        if (recommended === chemConcentration) {
-            return name + " at optimal levels. No adjustment needed!"
-        }
-        else if (chemConcentration < recommended){
-            val diffProportion = recommended - chemConcentration
-            val diffAmount = diffProportion * pool.poolGallonSize
-            return "There is not enough " + name + " in the pool. Please add " + diffAmount +
-                    " ounces of " + name + "to the pool and wait " + hoursNotSafe + " before swimming."
-        }
-        else { //by process of elimination, the chemConcentration must be greater than recommended
-            val diffProportion = chemConcentration - recommended
-            val diffAmount = diffProportion * pool.poolGallonSize
-            return "There is too much " + name + " in the pool. Filter out " + diffAmount +
-                    " ounces or add water until there are " + recommended + " ounces of " + name +
-                    " per gallon of water."
+        when {
+            recommended === chemConcentration -> {
+                return "$name at optimal levels. No adjustment needed!"
+            }
+            chemConcentration < recommended -> {
+                val diffProportion = recommended - chemConcentration
+                val diffAmount = diffProportion * pool.poolGallonSize
+                return "There is not enough $name in the pool. Please add $diffAmount " +
+                        "ounces of $name to the pool and wait $hoursNotSafe before swimming."
+            }
+            else -> { //by process of elimination, the chemConcentration must be greater than recommended
+                val diffProportion = chemConcentration - recommended
+                val diffAmount = diffProportion * pool.poolGallonSize
+                return "There is too much $name in the pool. Filter out $diffAmount " +
+                        "ounces or add water until there are $recommended ounces of $name per gallon of water."
+            }
         }
 
     }
