@@ -2,12 +2,10 @@ package com.example.pool
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
 import com.example.pool.dto.Pool
 import com.example.pool.ui.main.MainViewModel
-import org.json.JSONObject
 
 //import kotlinx.android.synthetic.main.activity_main.*
 
@@ -97,8 +95,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * given any pool and any algae type, return the ammount of algaecide, chlorine, and time
-     * needed to make the pool safe
+     * Given any pool and any algae type, return the amount of algaecide and chlorine to add,
+     * and the amount of time needed to make the pool safe
      */
     private fun cleanAlgae(pool: Pool, algae: Algae): String {
         val algaecideNeeded = algae.ozPerGallon * pool.poolGallonSize
@@ -109,6 +107,35 @@ class MainActivity : AppCompatActivity() {
                 algaecideNeeded + " ounces of algecide and " +
                 chlorineNeeded + " ounces of chlorine is necessary. The pool is not safe until " +
                 hoursPoolNotSafe + " after use."
+    }
+
+    /**
+     * Given any pool and chemical, and a current reading of that chemical's concentration in the pool,
+     * return the action to take (add, remove, or none)
+     * @param chemConcentration the proportion of the pool water that is made up of this chemical,
+     * expressed as a decimal between 0-1
+     */
+    private fun testChemicalConcentration(pool: Pool, chemical: Chemical, chemConcentration: Float): String {
+        val recommended = chemical.ozPerGallon
+        val name = chemical.name
+        val hoursNotSafe = chemical.hoursCantSwim
+        if (recommended === chemConcentration) {
+            return name + " at optimal levels. No adjustment needed!"
+        }
+        else if (chemConcentration < recommended){
+            val diffProportion = recommended - chemConcentration
+            val diffAmount = diffProportion * pool.poolGallonSize
+            return "There is not enough " + name + " in the pool. Please add " + diffAmount +
+                    " ounces of " + name + "to the pool and wait " + hoursNotSafe + " before swimming."
+        }
+        else { //by process of elimination, the chemConcentration must be greater than recommended
+            val diffProportion = chemConcentration - recommended
+            val diffAmount = diffProportion * pool.poolGallonSize
+            return "There is too much " + name + " in the pool. Filter out " + diffAmount +
+                    " ounces or add water until there are " + recommended + " ounces of " + name +
+                    " per gallon of water."
+        }
+
     }
 
 }
