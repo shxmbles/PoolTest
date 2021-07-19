@@ -5,11 +5,15 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
+import com.example.pool.dto.Pool
 import com.example.pool.ui.main.MainViewModel
+import org.json.JSONObject
+
 //import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    //create a test Pool object. In the future this will be created from user input
+    val testPool = Pool("pool1", 15000F)
 
     //each chemical can be created here using the chemical class
     val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
@@ -88,6 +92,21 @@ class MainActivity : AppCompatActivity() {
             "sodiumBicarbonate" -> return alkalinity.ASINTiers[priceLevel]
             else -> return ""
         }
+    }
+
+    /**
+     * given any pool and any algae type, return the ammount of algaecide, chlorine, and time
+     * needed to make the pool safe
+     */
+    private fun cleanAlgae(pool: Pool, algae: Algae): String {
+        val algaecideNeeded = algae.ozPerGallon * pool.poolGallonSize
+        val chlorineNeeded = algae.chlBoostPerGallon * pool.poolGallonSize
+        val hoursPoolNotSafe = Math.max(algae.hoursCantSwim, chlorine.hoursCantSwim)
+
+        return algae.toString() + " should never appear, and any amount is dangerous. " +
+                algaecideNeeded + " ounces of algecide and " +
+                chlorineNeeded + " ounces of chlorine is necessary. The pool is not safe until " +
+                hoursPoolNotSafe + " after use."
     }
 
 }

@@ -8,5 +8,5 @@ package com.example.pool.dto
  *
  * @property isIndoorPool, not sure if this would matter, but made it an optional field anyway
  */
-class Pool(val name: String, val poolGallonSize: Float, val isIndoorPool: Boolean = false) {
+data class Pool(val name: String, val poolGallonSize: Float, val isIndoorPool: Boolean = false) {
 }
