@@ -81,13 +81,13 @@ class MainActivity : AppCompatActivity() {
             return pH.ASINTiers[priceLevel+3]
         //1 qt
         else if (productType=="greenAlgaecide")
-            return gAlgae.ASINTag
+            return greenAlgae.ASINTag
         //1 qt
         else if (productType=="yellowAlgaecide")
-            return yAlgae.ASINTag
+            return yellowAlgae.ASINTag
         //1 qt
         else if (productType=="blackAlgaecide")
-            return bAlgae.ASINTag
+            return blackAlgae.ASINTag
         //4 lbs
         else if (productType=="calcium")
             return calciumHardness.ASINTiers[priceLevel]
