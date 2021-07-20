@@ -19,13 +19,13 @@ class ExampleUnitTest {
     }
     @Test
     fun chemicalDTO_toStringFormat() {
-        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPerGallon=.5F, ASINTiers=arrayOf())
+        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPerGallon=.5F, ASINTiers=arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
         assertTrue(chemical.toString().equals("example is a chemical with an acceptable range of 0 to 1" +
                 "and is unsafe for pool goers 1 hour after use."))
     }
     @Test
     fun algaeDTO_toStringFormat() {
-        val algae = Algae(type="example", hoursCantSwim=0F, ozPerGallon=.5F, chlBoostPerGallon=1F, ASINTag="NeedsTag")
+        val algae = Algae(type="example", hoursCantSwim=0F, ozPerGallon=.5F, chlBoostPerGallon=1F, ASINTag="B002WKJAYS")
         assertTrue(algae.toString().equals("example should never appear, and any amount is dangerous. Your pool is safe for pool goers."))
     }
 }
