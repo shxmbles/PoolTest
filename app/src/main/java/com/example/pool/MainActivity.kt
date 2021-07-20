@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun generatePoolStatusList(size: Int) : List<poolStatusItem> {
+    private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
         TODO()
-        val list = ArrayList<poolStatusItem>()
+        val list = ArrayList<PoolStatusItem>()
 
-        val item = poolStatusItem(imageResource = 1, "Test", "Low", "0")
+        val item = PoolStatusItem(imageResource = 1, "Test", "Low", "0")
         list += item
 
         return list
