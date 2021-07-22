@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface ProductDAO {
     val parameter: String
     @GET("/request?api_key=D07FB49BFD304162AD9692342ADB6AB7")
-    abstract fun getProduct(
+    fun getProduct(
         @Query(value = "asin") myASIN: String,
         @Query(value = "type") type: String = "product",
         @Query(value = "amazon_domain") myDomain: String = "amazon.com")

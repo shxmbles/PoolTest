@@ -42,12 +42,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        TODO(
+        // TODO
         //val exampleList  = generatePoolStatusList(2)
         //recycler_view.adapter = PoolItemAdapter(exampleList)
         //recycler_view.layoutManager = LinearLayoutManager(this)
         //recycler_view.setHasFixedSize(true)
-        )
     }
 
     private fun generatePoolStatusList(size: Int) : List<poolStatusItem> {
