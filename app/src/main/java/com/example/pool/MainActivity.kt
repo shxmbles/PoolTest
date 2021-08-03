@@ -68,34 +68,26 @@ class MainActivity : AppCompatActivity() {
      * @return the asin of the product which we will fetch from the amazon api
      */
     private fun getASIN(priceLevel: Int, productType: String) : String {
-        if (productType=="chlorine")
-            return chlorine.ASINTiers[priceLevel]
-        //5 lbs
-        else if (productType=="cyanuricAcid")
-            return cyanuricAcid.ASINTiers[priceLevel]
-        //4 lbs
-        else if (productType=="phIncrease")
-            return pH.ASINTiers[priceLevel]
-        //5 lbs for most
-        else if (productType=="phDecrease")
-            return pH.ASINTiers[priceLevel+3]
-        //1 qt
-        else if (productType=="greenAlgaecide")
-            return gAlgae.ASINTag
-        //1 qt
-        else if (productType=="yellowAlgaecide")
-            return yAlgae.ASINTag
-        //1 qt
-        else if (productType=="blackAlgaecide")
-            return bAlgae.ASINTag
-        //4 lbs
-        else if (productType=="calcium")
-            return calciumHardness.ASINTiers[priceLevel]
-        //5 lbs
-        else if (productType=="sodiumBicarbonate")
-            return alkalinity.ASINTiers[priceLevel]
-        else
-            return ""
+        when (productType) {
+            "chlorine" -> return chlorine.ASINTiers[priceLevel]
+            //5 lbs
+            "cyanuricAcid" -> return cyanuricAcid.ASINTiers[priceLevel]
+            //4 lbs
+            "phIncrease" -> return pH.ASINTiers[priceLevel]
+            //5 lbs for most
+            "phDecrease" -> return pH.ASINTiers[priceLevel+3]
+            //1 qt
+            "greenAlgaecide" -> return gAlgae.ASINTag
+            //1 qt
+            "yellowAlgaecide" -> return yAlgae.ASINTag
+            //1 qt
+            "blackAlgaecide" -> return bAlgae.ASINTag
+            //4 lbs
+            "calcium" -> return calciumHardness.ASINTiers[priceLevel]
+            //5 lbs
+            "sodiumBicarbonate" -> return alkalinity.ASINTiers[priceLevel]
+            else -> return ""
+        }
     }
 
 }
