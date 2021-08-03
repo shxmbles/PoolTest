@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
     val phosphates = Chemical(name= "pho", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
             ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
-    val gAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
-    val yAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
-    val bAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B00BGNLPCW")
+    val greenAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
+    val yellowAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
+    val blackAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B00BGNLPCW")
     val myProduct = MainViewModel().fetchProduct(myASIN="B00PZZFG0O")
 
 
@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun generatePoolStatusList(size: Int) : List<poolStatusItem> {
+    private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
         TODO()
-        val list = ArrayList<poolStatusItem>()
+        val list = ArrayList<PoolStatusItem>()
 
-        val item = poolStatusItem(imageResource = 1, "Test", "Low", "0")
+        val item = PoolStatusItem(imageResource = 1, "Test", "Low", "0")
         list += item
 
         return list
@@ -81,13 +81,13 @@ class MainActivity : AppCompatActivity() {
             return pH.ASINTiers[priceLevel+3]
         //1 qt
         else if (productType=="greenAlgaecide")
-            return gAlgae.ASINTag
+            return greenAlgae.ASINTag
         //1 qt
         else if (productType=="yellowAlgaecide")
-            return yAlgae.ASINTag
+            return yellowAlgae.ASINTag
         //1 qt
         else if (productType=="blackAlgaecide")
-            return bAlgae.ASINTag
+            return blackAlgae.ASINTag
         //4 lbs
         else if (productType=="calcium")
             return calciumHardness.ASINTiers[priceLevel]

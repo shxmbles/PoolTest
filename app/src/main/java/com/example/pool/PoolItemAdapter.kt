@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.pool_status_item.view.*
 
 
 
-class PoolItemAdapter(private val poolList: List<poolStatusItem>): RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>() {
+class PoolItemAdapter(private val poolList: List<PoolStatusItem>): RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>() {
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
