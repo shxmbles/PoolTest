@@ -3,6 +3,9 @@ package com.example.pool
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Retrofit used to implement API call
+ */
 object RetrofitClientInstance {
     private var retrofit: Retrofit? = null;
     private val BASE_URL = "https://api.rainforestapi.com";

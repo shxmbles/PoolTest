@@ -11,7 +11,7 @@ import com.example.pool.ui.main.MainViewModel
 class MainActivity : AppCompatActivity() {
 
 
-    //each chemical can be created here using the chemical class
+    //Chemicals used in pools declared
     val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
             ozPerGallon= .005F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
