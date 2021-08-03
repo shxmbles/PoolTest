@@ -2,14 +2,18 @@ package com.example.pool
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
+import com.example.pool.dto.Pool
 import com.example.pool.ui.main.MainViewModel
+
 //import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    //create a test Pool object. In the future this will be created from user input
+    val testPool = Pool("pool1", 15000F)
+    //set this pool object to be the active pool
+    val activePool = testPool
 
     //Chemicals used in pools declared
     val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
@@ -68,34 +72,71 @@ class MainActivity : AppCompatActivity() {
      * @return the asin of the product which we will fetch from the amazon api
      */
     private fun getASIN(priceLevel: Int, productType: String) : String {
-        if (productType=="chlorine")
-            return chlorine.ASINTiers[priceLevel]
-        //5 lbs
-        else if (productType=="cyanuricAcid")
-            return cyanuricAcid.ASINTiers[priceLevel]
-        //4 lbs
-        else if (productType=="phIncrease")
-            return pH.ASINTiers[priceLevel]
-        //5 lbs for most
-        else if (productType=="phDecrease")
-            return pH.ASINTiers[priceLevel+3]
-        //1 qt
-        else if (productType=="greenAlgaecide")
-            return gAlgae.ASINTag
-        //1 qt
-        else if (productType=="yellowAlgaecide")
-            return yAlgae.ASINTag
-        //1 qt
-        else if (productType=="blackAlgaecide")
-            return bAlgae.ASINTag
-        //4 lbs
-        else if (productType=="calcium")
-            return calciumHardness.ASINTiers[priceLevel]
-        //5 lbs
-        else if (productType=="sodiumBicarbonate")
-            return alkalinity.ASINTiers[priceLevel]
-        else
-            return ""
+        when (productType) {
+            "chlorine" -> return chlorine.ASINTiers[priceLevel]
+            //5 lbs
+            "cyanuricAcid" -> return cyanuricAcid.ASINTiers[priceLevel]
+            //4 lbs
+            "phIncrease" -> return pH.ASINTiers[priceLevel]
+            //5 lbs for most
+            "phDecrease" -> return pH.ASINTiers[priceLevel+3]
+            //1 qt
+            "greenAlgaecide" -> return gAlgae.ASINTag
+            //1 qt
+            "yellowAlgaecide" -> return yAlgae.ASINTag
+            //1 qt
+            "blackAlgaecide" -> return bAlgae.ASINTag
+            //4 lbs
+            "calcium" -> return calciumHardness.ASINTiers[priceLevel]
+            //5 lbs
+            "sodiumBicarbonate" -> return alkalinity.ASINTiers[priceLevel]
+            else -> return ""
+        }
+    }
+
+    /**
+     * Given any pool and any algae type, return the amount of algaecide and chlorine to add,
+     * and the amount of time needed to make the pool safe
+     */
+    private fun cleanAlgae(pool: Pool, algae: Algae): String {
+        val algaecideNeeded = algae.ozPerGallon * pool.poolGallonSize
+        val chlorineNeeded = algae.chlBoostPerGallon * pool.poolGallonSize
+        val hoursPoolNotSafe = Math.max(algae.hoursCantSwim, chlorine.hoursCantSwim)
+
+        return algae.toString() + " should never appear, and any amount is dangerous. " +
+                algaecideNeeded + " ounces of algecide and " +
+                chlorineNeeded + " ounces of chlorine is necessary. The pool is not safe until " +
+                hoursPoolNotSafe + " after use."
+    }
+
+    /**
+     * Given any pool and chemical, and a current reading of that chemical's concentration in the pool,
+     * return the action to take (add, remove, or none)
+     * @param chemConcentration the proportion of the pool water that is made up of this chemical,
+     * expressed as a decimal between 0-1
+     */
+    private fun testChemicalConcentration(pool: Pool, chemical: Chemical, chemConcentration: Float): String {
+        val recommended = chemical.ozPerGallon
+        val name = chemical.name
+        val hoursNotSafe = chemical.hoursCantSwim
+        when {
+            recommended === chemConcentration -> {
+                return "$name at optimal levels. No adjustment needed!"
+            }
+            chemConcentration < recommended -> {
+                val diffProportion = recommended - chemConcentration
+                val diffAmount = diffProportion * pool.poolGallonSize
+                return "There is not enough $name in the pool. Please add $diffAmount " +
+                        "ounces of $name to the pool and wait $hoursNotSafe before swimming."
+            }
+            else -> { //by process of elimination, the chemConcentration must be greater than recommended
+                val diffProportion = chemConcentration - recommended
+                val diffAmount = diffProportion * pool.poolGallonSize
+                return "There is too much $name in the pool. Filter out $diffAmount " +
+                        "ounces or add water until there are $recommended ounces of $name per gallon of water."
+            }
+        }
+
     }
 
 }

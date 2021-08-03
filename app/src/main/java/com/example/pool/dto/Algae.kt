@@ -1,5 +1,9 @@
 package com.example.pool.dto
 
+import com.example.pool.MainActivity
+import com.example.pool.dto.Chemical
+
+
 /**
  * Algae Type
  *
@@ -12,21 +16,6 @@ package com.example.pool.dto
  * @constructor creates an algae object based on supplied properties
  */
 class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, val chlBoostPerGallon: Float, val ASINTag: String) {
-    /**
-     * @param poolGallonSize is the size of the pool
-     * @return amount of algecide that needs to be added.
-     */
-    fun calcAlgNeeded(poolGallonSize: Float): Float {
-        return ozPerGallon * poolGallonSize
-    }
-    /**
-     * @param poolGallonSize is the size of the pool
-     * @return amount of chlorine that needs to be added, or zero for none. a negative number
-     * represents having too much, and needing to remove it.
-     */
-    fun calcChlNeeded(poolGallonSize: Float): Float {
-        return (chlBoostPerGallon * 2) * poolGallonSize
-    }
 
     /**
      * @override toString function
@@ -34,14 +23,6 @@ class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, 
      */
     @Override
     override fun toString(): String {
-        //may need to be modified for units
-        if (this.hoursCantSwim > 0 ) {
-            return this.type + " should never appear, and any amount is dangerous. " + this.ozPerGallon + " of algecide and " +
-            this.chlBoostPerGallon + " of chlorine is necessary, and isn't safe for pool goers until " + hoursCantSwim + " after use."
-        }
-        else
-        {
-            return this.type + " should never appear, and any amount is dangerous. Your pool is safe for pool goers."
-        }
+        return "$type algae"
     }
 }
