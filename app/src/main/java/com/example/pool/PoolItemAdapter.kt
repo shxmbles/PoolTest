@@ -7,12 +7,13 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pool.PoolStatusItem
 import kotlinx.android.synthetic.main.pool_status_item.view.*
 
 
 
 
-class PoolItemAdapter(private val poolList: List<poolStatusItem>): RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>() {
+class PoolItemAdapter(private val poolList: List<PoolStatusItem>): RecyclerView.Adapter<PoolItemAdapter.PoolItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoolItemViewHolder {

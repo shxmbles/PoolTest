@@ -26,7 +26,7 @@ class ProductDataIntegrationTest {
 
     @Test
     fun confirmChlorine_outputsChlorine () {
-        var product: Product = Product("Chlorine", "https://link", "image_url")
+        var product = Product("Chlorine", "https://link", "image_url")
         assertEquals("Chlorine is available for purchase on Amazon at https://link", product.toString());
     }
 
@@ -51,12 +51,18 @@ class ProductDataIntegrationTest {
         var chlorineCalled = false;
         mvm.product.observeForever {
             assertNotNull(it)
+            assertTrue(it.title == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine")
+            assertTrue(it.link == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O")
+            assertTrue(it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg")
+
             if (it.title == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
                 && it.link == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O"
-                && it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg") { chlorineCalled = true
+                && it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg") {
+                    chlorineCalled = true
             }
+            assertTrue(chlorineCalled)
         }
-        assertTrue(chlorineCalled)
+
     }
 
 }

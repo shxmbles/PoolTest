@@ -1,14 +1,15 @@
 package com.example.pool.ui.main
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.pool.dto.Product
 import com.example.pool.service.ProductService
 
-class MainViewModel {
+class MainViewModel: ViewModel() {
     var product: MutableLiveData<Product> = MutableLiveData<Product>()
     var productService: ProductService = ProductService()
     /**
-     * assigns var countries with JSON data from fetchCountries()
+     * assigns var products with JSON data from fetchProducts()
      */
     fun fetchProduct(myASIN: String) {
         product = productService.fetchProduct(myASIN)

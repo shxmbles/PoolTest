@@ -8,9 +8,10 @@ package com.example.pool.dto
  * @property ozPerGallon, ounces of algecide needed per gallon of pool water. Again, can adjust units
  * of measure
  * @property chlBoostPerGallon, amount of chlorine needed to boost the algecide for algae elimination
- * @constructor creates a chemical based on supplied properties
+ * @property ASINTag, Codes corresponding to different quality tiers of products.
+ * @constructor creates an algae object based on supplied properties
  */
-class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, val chlBoostPerGallon: Float) {
+class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, val chlBoostPerGallon: Float, val ASINTag: String) {
     /**
      * @param poolGallonSize is the size of the pool
      * @return amount of algecide that needs to be added.
@@ -33,9 +34,8 @@ class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, 
      */
     @Override
     override fun toString(): String {
-        //may need to be modified for units
         if (this.hoursCantSwim > 0 ) {
-            return this.type + " should never appear, and any amount is dangerous. " + this.ozPerGallon + " of algecide and " +
+            return this.type + " should never appear, and any amount is dangerous. " + this.ozPerGallon + " of algaecide and " +
             this.chlBoostPerGallon + " of chlorine is necessary, and isn't safe for pool goers until " + hoursCantSwim + " after use."
         }
         else

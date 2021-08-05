@@ -10,9 +10,10 @@ package com.example.pool.dto
  * of chemical added
  * @property ozPerGallon, ounces of chemical needed per gallon of pool water. Again, can adjust units
  * of measure
+ * @property ASINTiers, Codes corresponding to different quality tiers of products.
  * @constructor creates a chemical based on supplied properties
  */
-class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: Float, val ozPerGallon: Float) {
+class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: Float, val ozPerGallon: Float, val ASINTiers: Array<String>) {
     /**
      * @param poolSize is the current level of a certain chemical
      * @return amount of chemical that needs to be added, or zero for none. a negative number
