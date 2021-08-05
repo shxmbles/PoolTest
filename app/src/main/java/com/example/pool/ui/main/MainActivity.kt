@@ -55,6 +55,30 @@ class MainActivity : AppCompatActivity() {
 
         val chl = PoolStatusItem(imageResource = icon[0], "Chlorine", "Low", "1")
         list += chl
+
+        val cAcid = PoolStatusItem(imageResource = icon[0], "Cyanuric Acid", "Low", "2")
+        list += cAcid
+
+        val pH = PoolStatusItem(imageResource = icon[0], "pH", "Low", "2")
+        list += pH
+
+        val dissolvedSolids = PoolStatusItem(imageResource = icon[0], "Dissolved Solids", "Low", "2")
+        list += dissolvedSolids
+
+        val alkalinity = PoolStatusItem(imageResource = icon[0], "Alkalinity", "Low", "2")
+        list += alkalinity
+
+        val phosphates = PoolStatusItem(imageResource = icon[0], "Phosphates", "Low", "2")
+        list += phosphates
+
+        val cHardness = PoolStatusItem(imageResource = icon[0], "Calcium Hardness", "Low", "2")
+        list += cHardness
+
+        val totalDissolvedSolids = PoolStatusItem(imageResource = icon[0], "Total Dissolved Solids", "Low", "2")
+        list += totalDissolvedSolids
+
+
+
         return list
     }
 
