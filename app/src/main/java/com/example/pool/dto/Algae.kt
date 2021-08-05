@@ -34,9 +34,8 @@ class Algae(val type: String, val hoursCantSwim: Float, val ozPerGallon: Float, 
      */
     @Override
     override fun toString(): String {
-        //may need to be modified for units
         if (this.hoursCantSwim > 0 ) {
-            return this.type + " should never appear, and any amount is dangerous. " + this.ozPerGallon + " of algecide and " +
+            return this.type + " should never appear, and any amount is dangerous. " + this.ozPerGallon + " of algaecide and " +
             this.chlBoostPerGallon + " of chlorine is necessary, and isn't safe for pool goers until " + hoursCantSwim + " after use."
         }
         else

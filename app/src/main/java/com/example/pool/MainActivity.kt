@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
      * @param productType is the chemical name ("chlorine", "cyanuricAcid", "phIncrease", "phDecrease", "algaecide", "calcium", "sodiumBicarbonate")
      * @return the asin of the product which we will fetch from the amazon api
      */
-    private fun getASIN(priceLevel: Int, productType: String) : String {
+    public fun getASIN(priceLevel: Int, productType: String) : String {
         when (productType) {
             "chlorine" -> return chlorine.ASINTiers[priceLevel]
             //5 lbs
