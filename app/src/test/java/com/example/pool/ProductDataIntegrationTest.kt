@@ -6,6 +6,7 @@ import com.example.pool.service.ProductService
 import com.example.pool.ui.main.MainViewModel
 import io.mockk.mockk
 import org.junit.Test
+import android.util.Log
 
 import org.junit.Assert.*
 import org.junit.Rule
@@ -47,17 +48,30 @@ class ProductDataIntegrationTest {
         mvm.fetchProduct(myASIN="B00PZZFG0O");
     }
 
-    private fun thenResultContainsChlorine() {
-        var chlorineCalled = false;
-        mvm.product.observeForever {
-            assertNotNull(it)
-            if (it.title == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
-                && it.link == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O"
-                && it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg") { chlorineCalled = true
-            }
-        }
-        assertTrue(chlorineCalled)
-    }
 
+    private fun thenResultContainsChlorine() {
+        mvm.product.observeForever {
+            var chlorineCalled = false
+
+            assertNotNull(it)
+            assertTrue(it.title == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine")
+            assertTrue(it.link == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O")
+            assertTrue(it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg")
+
+            if (it.title == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine")
+            {
+                chlorineCalled = true
+            }
+            else if (it.link == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O")
+            {
+                chlorineCalled = true
+            }
+            else if (it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg")
+            {
+                chlorineCalled = true
+            }
+            assertTrue(chlorineCalled)
+        }
+    }
 }
 
