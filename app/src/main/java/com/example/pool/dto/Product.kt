@@ -13,8 +13,31 @@ class Product(val title: String, val link: String, val main_image: String) {
      * @return product name and a link to the amazon site that sells it
      */
     @Override
-    override public fun toString(): String {
+    override fun toString(): String {
         return "$title is available for purchase on Amazon at: $link";
     }
+
+    /**
+     * @return title value of product
+     */
+    @JvmName("getTitle1")
+    fun getTitle(): String {
+        return this.title;
+    }
+    /**
+     * @return link value of product
+     */
+    @JvmName("getLink1")
+    fun getLink(): String {
+        return this.link;
+    }
+    /**
+     * @return image value of product
+     */
+    @JvmName("getMain_image1")
+    public fun getImage(): String {
+        return this.main_image
+    }
+
 
 }
