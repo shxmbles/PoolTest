@@ -1,38 +1,36 @@
-package com.example.pool
+package com.example.pool.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pool.R
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
-import com.example.pool.ui.main.MainViewModel
-import com.example.pool.PoolStatusItem
-//import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
-
-
     //Chemicals used in pools declared
     val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
+        ozPerGallon= .005F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
     val alkalinity = Chemical(name= "alk", okRange= arrayOf(80F, 120F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
+        ozPerGallon= .005F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
 
     val calciumHardness = Chemical(name= "cal", okRange= arrayOf(200F, 300F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
+        ozPerGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
 
     val pH = Chemical(name= "pH", okRange= arrayOf(7.4F, 7.6F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
+        ozPerGallon= .005F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
 
     val cyanuricAcid = Chemical(name= "cya", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
-    
+        ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
+
     val totalDissolvedSolids = Chemical(name= "tds", okRange= arrayOf(0F, 1500F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
+        ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
     val phosphates = Chemical(name= "pho", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
-            ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
+        ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
     val greenAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
     val yellowAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
@@ -40,24 +38,23 @@ class MainActivity : AppCompatActivity() {
     val myProduct = MainViewModel().fetchProduct(myASIN="B00PZZFG0O")
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        TODO(
-        //val exampleList  = generatePoolStatusList(2)
-        //recycler_view.adapter = PoolItemAdapter(exampleList)
-        //recycler_view.layoutManager = LinearLayoutManager(this)
-        //recycler_view.setHasFixedSize(true)
-        )
+        val exampleList = generatePoolStatusList(2)
+        recycler_view.adapter = PoolItemAdapter(exampleList)
+        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.setHasFixedSize(true)
     }
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
-        TODO()
+
+        val icon = arrayOf<Int>(R.drawable.chlorine)
         val list = ArrayList<PoolStatusItem>()
 
-        val item = PoolStatusItem(imageResource = 1, "Test", "Low", "0")
-        list += item
-
+        val chl = PoolStatusItem(imageResource = icon[0], "Chlorine", "Low", "1")
+        list += chl
         return list
     }
 

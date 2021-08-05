@@ -3,10 +3,9 @@ package com.example.pool
 import com.example.pool.dto.Algae
 import com.example.pool.dto.Chemical
 import org.junit.Test
-import com.example.pool.MainActivity
+import com.example.pool.ui.main.MainActivity
 
 import org.junit.Assert.*
-import java.util.Objects.toString
 
 /**
  * Example local unit test, which will execute on the development machine (host).
