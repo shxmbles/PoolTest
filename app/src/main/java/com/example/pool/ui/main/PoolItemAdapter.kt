@@ -26,7 +26,7 @@ class PoolItemAdapter(private val poolList: List<PoolStatusItem>): RecyclerView.
         val currentItem = poolList[position]
         holder.imageView.setImageResource(0)
         holder.titleView.text = currentItem.Title
-        holder.description.text = currentItem.description
+        holder.description.text = currentItem.Range
         holder.status.text = currentItem.poolStatus
     }
 
