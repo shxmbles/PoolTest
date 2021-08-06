@@ -10,7 +10,7 @@ import com.example.pool.dto.Product
  * Interface that contains the query for the product API
  */
 interface ProductDAO {
-    @GET("https://api.rainforestapi.com/request?api_key=73DA2F0D640F48CC9CF908DFC31A208C&type=product&amazon_domain=amazon.com&asin=B073JYC4XM")
+    @GET("/request")
     fun getProduct(
         @Query(value = "asin") myASIN: String = "B073JYC4XM",
         @Query(value = "api_key") api_key: String ="73DA2F0D640F48CC9CF908DFC31A208C",

@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.pool.service.ProductService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", it.link + "Test")
             Log.d("MainActivity", it.title + "Test")
         })
+
+        val myProduct = ProductService().fetchProduct("B00PZZFG0O")
 
         submit_info.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {

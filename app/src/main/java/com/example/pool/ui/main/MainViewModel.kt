@@ -18,7 +18,7 @@ class MainViewModel: ViewModel() {
      * assigns var product with JSON data from fetchProducts()
      */
     fun fetchProduct(myASIN: String) {
-        product = productService.fetchProduct(myASIN)
+        //product = productService.fetchProduct(myASIN)
     }
 
     val myResponse: MutableLiveData<JSONProduct> = MutableLiveData()
