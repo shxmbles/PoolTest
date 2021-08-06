@@ -1,12 +1,11 @@
 package com.example.pool
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.pool.dto.JSONMainImage
 import com.example.pool.dto.JSONProduct
 import com.example.pool.dto.Product
 import com.example.pool.ui.main.MainViewModel
 import org.junit.Test
-
+import android.util.Log
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.rules.TestRule
@@ -24,7 +23,7 @@ class ProductDataIntegrationTest {
 
     @Test
     fun confirmChlorine_outputsChlorine () {
-        val product = Product(JSONProduct(title="Chlorine", link="https://link", JSONMainImage = JSONMainImage(imageLink="image_url")))
+        val product = Product(JSONProduct(title="Chlorine", link="https://link"))
         assertEquals("Chlorine is available for purchase on Amazon at https://link", product.toString())
     }
 
@@ -51,8 +50,8 @@ class ProductDataIntegrationTest {
             assertNotNull(it)
             if (it.getJSONProduct().getTitle() == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
                 && it.getJSONProduct().getLink() == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O"
-                && it.getJSONProduct().getJSONMain_Image().getImageLink() == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg"
             ) {
+                Log.e("Tag", it.getJSONProduct().getTitle())
                 chlorineCalled = true
             }
         }

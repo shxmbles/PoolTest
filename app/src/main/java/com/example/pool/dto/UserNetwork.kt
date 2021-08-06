@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object UserNetwork {
     val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://amazon.com")
+            .baseUrl("https://api.rainforestapi.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(UserAPI::class.java)

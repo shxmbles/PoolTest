@@ -2,11 +2,8 @@ package com.example.pool.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.JsonReader
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
@@ -14,13 +11,9 @@ import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
 import android.util.Log
 import android.widget.Spinner
-import com.example.pool.dto.JSONProduct
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.pool.dto.Product
 import kotlinx.android.synthetic.main.activity_main.*
-
-
 
 class MainActivity : AppCompatActivity() {
     lateinit var submit_info: Button
@@ -28,16 +21,16 @@ class MainActivity : AppCompatActivity() {
     val chemData = ArrayList<Chemical>()
 
     val chlorine = Chemical(name= "Chlorine", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
+        ozPerGallon= .0001F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
     val alkalinity = Chemical(name= "Alkalinity", okRange= arrayOf(80F, 120F), hoursCantSwim= 0F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
+        ozPerGallon= .0001F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
 
     val calciumHardness = Chemical(name= "Calcium Hardness", okRange= arrayOf(200F, 300F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
 
     val pHData = Chemical(name= "pH", okRange= arrayOf(7.4F, 7.6F), hoursCantSwim= 0F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
+        ozPerGallon= .0001F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
 
     val cyanuricAcid = Chemical(name= "Cyanuric Acid", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
@@ -75,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         recycler_view.setHasFixedSize(true)
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getPost()
         Log.d("GetPost", viewModel.getPost().toString())
         viewModel.myResponse.observe(this, Observer {
             Log.d("MainActivity", it.link + "Test")
@@ -97,11 +89,16 @@ class MainActivity : AppCompatActivity() {
         chemList.forEach()
         {
             if(chemList[index].poolStatus.toFloat() <= chemData[index].okRange[0] &&
-               chemList[index].poolStatus.toFloat() <= chemData[index].okRange[1]) {
-
+               chemList[index].poolStatus.toFloat() >= chemData[index].okRange[1]) {
+                val paragraph = chemData[index].reportString(true)
+                results += paragraph
             }
+            else
+            {
+                val amountNeeded = chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize))
+            }
+            index += 1
         }
-
         return results
     }
 

@@ -21,7 +21,7 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
      */
     var amountNeeded: Float = 0F;
     fun calculateAmountNeeded(poolSize: Float): Float {
-        amountNeeded = ozPerGallon * poolSize
+        amountNeeded = ozPerGallon * poolSize * 0.0001F
         return amountNeeded
     }
 
@@ -39,15 +39,15 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
      * @return chemical name and a small summary about the chemical
      */
     @Override
-    override fun toString(): String {
+    fun reportString(canSwim: Boolean, ): String {
         //may need to be modified for units
         var hour = "hours"
         if (this.hoursCantSwim == 1F) {
             hour = "hour"
         }
-        if (this.hoursCantSwim > 0 ) {
+        if (canSwim == false) {
             return this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
-                    this.okRange[1].toString() + ", and is unsafe for pool goers"+ hoursCantSwim + hour + " after use."
+                    this.okRange[1].toString() + ", and is unsafe for pool goers."+ hoursCantSwim + hour + " after use."
         }
         else
         {

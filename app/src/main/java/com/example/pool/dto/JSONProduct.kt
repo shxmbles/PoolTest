@@ -10,14 +10,7 @@ import com.google.gson.annotations.SerializedName
  * @property JSONMainImage, an internal JSON item that contains further data
  * @constructor creates a JSONProduct object based on properties for use in creating a Product object with the API
  */
-public class JSONProduct(@SerializedName("title") var title: String, @SerializedName("link") var link: String, @SerializedName("main_image") var JSONMainImage: JSONMainImage) {
-    /**
-     * @return JSONMainImage object
-     */
-    @JvmName("getJSONMain_Image1")
-    fun getJSONMain_Image(): JSONMainImage {
-        return JSONMainImage
-    }
+public class JSONProduct(@SerializedName("title") var title: String, @SerializedName("link") var link: String) {
     /**
      * @return link
      */
@@ -31,13 +24,6 @@ public class JSONProduct(@SerializedName("title") var title: String, @Serialized
     @JvmName("getTitle1")
     fun getTitle(): String {
         return title
-    }
-    /**
-     * @param JSONMainImage to set this.JSONMainImage
-     */
-    @JvmName("setJSONMain_Image1")
-    fun setJSONMain_Image(JSONMainImage: JSONMainImage) {
-        this.JSONMainImage = JSONMainImage
     }
     /**
      * @param link to set this.link
