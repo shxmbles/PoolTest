@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Pool</string>
+    <string name="Results">Results</string>
+    <string name="Chlorine">Chlorine:</string>
+    <string name="Alkalinity">Alkalinity:</string>
+    <string name="CalciumHardness">Calcium Hardness:</string>
+    <string name="pH">pH:</string>
+    <string name="CyanuricAcid">Cyanuric Acid:</string>
+    <string name="TotalDissolvedSolids">Total Dissolved Solids:</string>
 </resources>

@@ -10,37 +10,38 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 
 class MainActivity : AppCompatActivity() {
     //Chemicals used in pools declared
-    val chlorine = Chemical(name= "chl", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
+    val chlorine = Chemical(name= "Chlorine", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
-    val alkalinity = Chemical(name= "alk", okRange= arrayOf(80F, 120F), hoursCantSwim= 0F,
+    val alkalinity = Chemical(name= "Alkalinity", okRange= arrayOf(80F, 120F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
 
-    val calciumHardness = Chemical(name= "cal", okRange= arrayOf(200F, 300F), hoursCantSwim= 0F,
+    val calciumHardness = Chemical(name= "Calcium Hardness", okRange= arrayOf(200F, 300F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
 
     val pH = Chemical(name= "pH", okRange= arrayOf(7.4F, 7.6F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
 
-    val cyanuricAcid = Chemical(name= "cya", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
+    val cyanuricAcid = Chemical(name= "Cyanuric Acid", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
 
-    val totalDissolvedSolids = Chemical(name= "tds", okRange= arrayOf(0F, 1500F), hoursCantSwim= 0F,
+    val totalDissolvedSolids = Chemical(name= "Total Dissolved Solids", okRange= arrayOf(0F, 1500F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
-    val phosphates = Chemical(name= "pho", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
+    val phosphates = Chemical(name= "Phosphates", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
         ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
 
     val greenAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
     val yellowAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
     val blackAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B00BGNLPCW")
-    val myProduct = MainViewModel().fetchProduct(myASIN="B00PZZFG0O")
+
 
 
 
@@ -82,31 +83,30 @@ class MainActivity : AppCompatActivity() {
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
 
+        val myProduct = MainViewModel().fetchProduct(myASIN="B00PZZFG0O")
+        Log.e("Beeleave", myProduct.toString())
         val icon = arrayOf<Int>(R.drawable.chlorine)
         val list = ArrayList<PoolStatusItem>()
 
-        val chl = PoolStatusItem(imageResource = icon[0], "Chlorine", "Low", "1")
+        val chl = PoolStatusItem(imageResource = icon[0], "Chlorine", "Safe Range: 1-5", "")
         list += chl
 
-        val cAcid = PoolStatusItem(imageResource = icon[0], "Cyanuric Acid", "Low", "2")
+        val cAcid = PoolStatusItem(imageResource = icon[0], "Cyanuric Acid", "Safe Range: 30-100", "")
         list += cAcid
 
-        val pH = PoolStatusItem(imageResource = icon[0], "pH", "Low", "2")
+        val pH = PoolStatusItem(imageResource = icon[0], "pH", "Safe Range: 7.4-7.6", "")
         list += pH
 
-        val dissolvedSolids = PoolStatusItem(imageResource = icon[0], "Dissolved Solids", "Low", "2")
-        list += dissolvedSolids
-
-        val alkalinity = PoolStatusItem(imageResource = icon[0], "Alkalinity", "Low", "2")
+        val alkalinity = PoolStatusItem(imageResource = icon[0], "Alkalinity", "Safe Range: 80-120", "")
         list += alkalinity
 
-        val phosphates = PoolStatusItem(imageResource = icon[0], "Phosphates", "Low", "2")
+        val phosphates = PoolStatusItem(imageResource = icon[0], "Phosphates", "Safe Range: 0-100", "")
         list += phosphates
 
-        val cHardness = PoolStatusItem(imageResource = icon[0], "Calcium Hardness", "Low", "2")
+        val cHardness = PoolStatusItem(imageResource = icon[0], "Calcium Hardness", "Safe Range: 200-300", "")
         list += cHardness
 
-        val totalDissolvedSolids = PoolStatusItem(imageResource = icon[0], "Total Dissolved Solids", "Low", "2")
+        val totalDissolvedSolids = PoolStatusItem(imageResource = icon[0], "Total Dissolved Solids", "Safe Range: 0-1500", "")
         list += totalDissolvedSolids
 
 
