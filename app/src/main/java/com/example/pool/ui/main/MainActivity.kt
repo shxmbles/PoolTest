@@ -72,12 +72,20 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-       /* val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        Log.d("GetPost", viewModel.getPost().toString())
-        viewModel.myResponse.observe(this, Observer {
-            Log.d("MainActivity", it.link + "Test")
-            Log.d("MainActivity", it.title + "Test")
-        })*/
+
+            val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+            Log.d("GetPost", viewModel.getPost().toString())
+            mvm.fetchProduct(myASIN = "B00PZZFG0O")
+            viewModel.product.observe(this, Observer {
+                Log.d("working", it.toString())
+                var mine = it
+                thisProduct = it
+                //Log.d("MainActivity", it.link + "Test")
+                //Log.d("MainActivity", it.title + "Test")
+            })
+        var prod: String
+        prod = thisProduct.toString()
 
         submit_info.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
