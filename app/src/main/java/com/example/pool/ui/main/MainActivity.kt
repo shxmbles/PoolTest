@@ -2,11 +2,16 @@ package com.example.pool.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,13 +44,40 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val exampleList = generatePoolStatusList(2)
         recycler_view.adapter = PoolItemAdapter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
+
+//        val algaeDropDownItems = arrayOf("Green", "Yellow", "Black")
+//        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,algaeDropDownItems)
+//
+//        algaeDropdown.adapter = arrayAdapter
+//        algaeDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//
+//        }
+
     }
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
