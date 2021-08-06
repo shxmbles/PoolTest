@@ -1,14 +1,12 @@
 package com.example.pool.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
 import com.example.pool.dto.Algae
@@ -20,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     lateinit var submit_info: Button
     var mvm: MainViewModel = MainViewModel()
+
+    var productArray = arrayOfNulls<Product>(7)
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
 
@@ -72,17 +72,16 @@ class MainActivity : AppCompatActivity() {
         recycler_view.setHasFixedSize(true)
 
         //this will return an array of product objects to be used in recycler view
-        fun getAllProducts(poolResults: Array<PoolResults>): Array<Product?> {
-            var asins = generateASINList(poolResults = poolResults)
-            var productList = arrayOfNulls<Product>(asins.size)
+        fun getAllProducts(poolResults: List<PoolResults>): Int {
+            var asins = generateASINList(poolResults = poolResults.toTypedArray())
             var index = 0
             asins.forEach { asin ->
                 mvm.fetchProduct(myASIN = asin)
                 mvm.product.observe(this, Observer {
-                    productList[index] = it
+                    productArray[index] = it
                 })
             }
-            return productList
+            return index
         }
 
         submit_info.setOnClickListener(object: View.OnClickListener{
