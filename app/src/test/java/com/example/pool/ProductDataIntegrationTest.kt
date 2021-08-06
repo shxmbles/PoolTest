@@ -24,7 +24,7 @@ class ProductDataIntegrationTest {
     @Test
     fun confirmChlorine_outputsChlorine () {
         val product = Product(JSONProduct(title="Chlorine", link="https://link"))
-        assertEquals("Chlorine is available for purchase on Amazon at https://link", product.toString())
+        assertEquals("Chlorine is available for purchase on Amazon at: https://link", product.toString())
     }
 
     @Test
@@ -48,14 +48,12 @@ class ProductDataIntegrationTest {
         var chlorineCalled = false
         mvm.product.observeForever {
             assertNotNull(it)
-            if (it.getJSONProduct().getTitle() == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
-                && it.getJSONProduct().getLink() == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O"
-            ) {
-                Log.e("Tag", it.getJSONProduct().getTitle())
+            if (it.getTitle() == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
+                && it.getLink() == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O") {
                 chlorineCalled = true
             }
+            assertTrue(chlorineCalled)
         }
-        assertTrue(chlorineCalled)
     }
 
 }

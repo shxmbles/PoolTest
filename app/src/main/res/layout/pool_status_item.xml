@@ -16,7 +16,6 @@
             android:layout_height="64dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/chlorine"
             android:visibility="visible"
             tools:visibility="visible" />
 

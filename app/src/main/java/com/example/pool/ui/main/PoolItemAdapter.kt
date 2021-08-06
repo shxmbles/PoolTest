@@ -24,7 +24,7 @@ class PoolItemAdapter(private val poolList: List<PoolStatusItem>): RecyclerView.
 
     override fun onBindViewHolder(holder: PoolItemViewHolder, position: Int) {
         val currentItem = poolList[position]
-        holder.imageView.setImageResource(0)
+        holder.imageView.setImageResource(currentItem.imageResource)
         holder.titleView.text = currentItem.Title
         holder.description.text = currentItem.Range
         holder.status.text = currentItem.poolStatus

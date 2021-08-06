@@ -23,6 +23,18 @@ public class Product(@SerializedName("product") private var JSONProduct: JSONPro
         this.JSONProduct = JSONProduct
     }
     /**
+     * @return title
+     */
+    fun getTitle(): String {
+        return this.JSONProduct.getTitle()
+    }
+    /**
+     * @return link
+     */
+    fun getLink(): String {
+        return this.JSONProduct.getLink()
+    }
+    /**
      * @override toString function
      * @return product name and a link to the amazon site that sells it
      */

@@ -68,14 +68,12 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+       /* val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         Log.d("GetPost", viewModel.getPost().toString())
         viewModel.myResponse.observe(this, Observer {
             Log.d("MainActivity", it.link + "Test")
             Log.d("MainActivity", it.title + "Test")
-        })
-
-        val myProduct = ProductService().fetchProduct("B00PZZFG0O")
+        })*/
 
         submit_info.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
@@ -107,28 +105,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
 
-        val icon = arrayOf<Int>(R.drawable.chlorine)
+        val icon = arrayOf(R.drawable.chlorine, R.drawable.alkalinity, R.drawable.calcium, R.drawable.ph, R.drawable.cacid, R.drawable.solid, R.drawable.phosphates)
         val list = ArrayList<PoolStatusItem>()
 
         val chl = PoolStatusItem(imageResource = icon[0], "Chlorine", "Safe Range: 1-5", "")
         list += chl
         chemData += chlorine
-        val alk = PoolStatusItem(imageResource = icon[0], "Alkalinity", "Safe Range: 80-120", "")
+        val alk = PoolStatusItem(imageResource = icon[1], "Alkalinity", "Safe Range: 80-120", "")
         list += alk
         chemData += alkalinity
-        val cHardness = PoolStatusItem(imageResource = icon[0], "Calcium Hardness", "Safe Range: 200-300", "")
+        val cHardness = PoolStatusItem(imageResource = icon[2], "Calcium Hardness", "Safe Range: 200-300", "")
         list += cHardness
         chemData += calciumHardness
-        val pH = PoolStatusItem(imageResource = icon[0], "pH", "Safe Range: 7.4-7.6", "")
+        val pH = PoolStatusItem(imageResource = icon[3], "pH", "Safe Range: 7.4-7.6", "")
         list += pH
         chemData += pHData
-        val cAcid = PoolStatusItem(imageResource = icon[0], "Cyanuric Acid", "Safe Range: 30-100", "")
+        val cAcid = PoolStatusItem(imageResource = icon[4], "Cyanuric Acid", "Safe Range: 30-100", "")
         list += cAcid
         chemData += cyanuricAcid
-        val totalDissolvedSolids = PoolStatusItem(imageResource = icon[0], "Total Dissolved Solids", "Safe Range: 0-1500", "")
+        val totalDissolvedSolids = PoolStatusItem(imageResource = icon[5], "Total Dissolved Solids", "Safe Range: 0-1500", "")
         list += totalDissolvedSolids
         chemData += tds
-        val phosphates = PoolStatusItem(imageResource = icon[0], "Phosphates", "Safe Range: 0-100", "")
+        val phosphates = PoolStatusItem(imageResource = icon[6], "Phosphates", "Safe Range: 0-100", "")
         list += phosphates
         chemData += phos
         return list
