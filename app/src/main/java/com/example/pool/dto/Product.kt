@@ -5,16 +5,20 @@ import com.google.gson.annotations.SerializedName
 /**
  * A Product
  *
- * @property title, the name of a product
- * @property link, a string that contains a link to the product on the amazon site
- * @property JSONMainImage, url of an image of the product
- * @constructor creates a chemical based on supplied properties
+ * @property JSONProduct, an internal JSON item that contains further data
+ * @constructor creates a producct based on supplied properties
  */
 public class Product(@SerializedName("product") private var JSONProduct: JSONProduct) {
 
+    /**
+     * @return JSONProduct object
+     */
     fun getJSONProduct(): JSONProduct {
         return JSONProduct
     }
+    /**
+     * @param JSONProduct to set this.JSONProduct
+     */
     fun setJSONProduct(JSONProduct: JSONProduct) {
         this.JSONProduct = JSONProduct
     }

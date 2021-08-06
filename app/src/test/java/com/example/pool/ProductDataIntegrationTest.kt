@@ -4,9 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.pool.dto.JSONMainImage
 import com.example.pool.dto.JSONProduct
 import com.example.pool.dto.Product
-import com.example.pool.service.ProductService
 import com.example.pool.ui.main.MainViewModel
-import io.mockk.mockk
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -24,12 +22,10 @@ class ProductDataIntegrationTest {
     var rule: TestRule =  InstantTaskExecutorRule()
     lateinit var mvm: MainViewModel
 
-    var productService = mockk<ProductService>()
-
     @Test
     fun confirmChlorine_outputsChlorine () {
-        var product = Product(JSONProduct(title="Chlorine", link="https://link", JSONMainImage = JSONMainImage(imageLink="image_url")))
-        assertEquals("Chlorine is available for purchase on Amazon at https://link", product.toString());
+        val product = Product(JSONProduct(title="Chlorine", link="https://link", JSONMainImage = JSONMainImage(imageLink="image_url")))
+        assertEquals("Chlorine is available for purchase on Amazon at https://link", product.toString())
     }
 
     @Test
@@ -46,11 +42,11 @@ class ProductDataIntegrationTest {
 
 
     private fun whenCallForChlorine() {
-        mvm.fetchProduct(myASIN="B00PZZFG0O");
+        mvm.fetchProduct(myASIN="B00PZZFG0O")
     }
 
     private fun thenResultContainsChlorine() {
-        var chlorineCalled = false;
+        var chlorineCalled = false
         mvm.product.observeForever {
             assertNotNull(it)
             if (it.getJSONProduct().getTitle() == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
