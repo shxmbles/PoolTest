@@ -35,11 +35,10 @@ class Chemical(val name: String, val okRange: Array<Float>, val hoursCantSwim: F
     }
 
     /**
-     * @override toString function
+     * @param canSwim, a boolean that says if the pool will be safe to swim in
      * @return chemical name and a small summary about the chemical
      */
-    @Override
-    fun reportString(canSwim: Boolean, ): String {
+    fun reportString(canSwim: Boolean): String {
         //may need to be modified for units
         var hour = "hours"
         if (this.hoursCantSwim == 1F) {
