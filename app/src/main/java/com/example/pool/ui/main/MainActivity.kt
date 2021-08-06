@@ -2,6 +2,7 @@ package com.example.pool.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -72,12 +73,12 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-       /* val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        Log.d("GetPost", viewModel.getPost().toString())
+        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.myResponse.observe(this, Observer {
+            Log.d("GetPost", mvm.getPost().toString())
             Log.d("MainActivity", it.link + "Test")
             Log.d("MainActivity", it.title + "Test")
-        })*/
+        })
 
         submit_info.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
