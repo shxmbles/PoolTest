@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pool.PoolStatusItem
+import com.example.pool.ui.main.PoolStatusItem
 import kotlinx.android.synthetic.main.pool_status_item.view.*
 
 

@@ -9,7 +9,7 @@ class MainViewModel: ViewModel() {
     var product: MutableLiveData<Product> = MutableLiveData<Product>()
     var productService: ProductService = ProductService()
     /**
-     * assigns var products with JSON data from fetchProducts()
+     * assigns var product with JSON data from fetchProducts()
      */
     fun fetchProduct(myASIN: String) {
         product = productService.fetchProduct(myASIN)
