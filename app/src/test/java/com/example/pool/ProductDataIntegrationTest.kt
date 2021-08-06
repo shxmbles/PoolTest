@@ -1,6 +1,8 @@
 package com.example.pool
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.pool.dto.JSONMainImage
+import com.example.pool.dto.JSONProduct
 import com.example.pool.dto.Product
 import com.example.pool.service.ProductService
 import com.example.pool.ui.main.MainViewModel
@@ -26,7 +28,7 @@ class ProductDataIntegrationTest {
 
     @Test
     fun confirmChlorine_outputsChlorine () {
-        var product = Product("Chlorine", "https://link", "image_url")
+        var product = Product(JSONProduct(title="Chlorine", link="https://link", JSONMainImage = JSONMainImage(imageLink="image_url")))
         assertEquals("Chlorine is available for purchase on Amazon at https://link", product.toString());
     }
 
@@ -51,15 +53,13 @@ class ProductDataIntegrationTest {
         var chlorineCalled = false;
         mvm.product.observeForever {
             assertNotNull(it)
-
-            if (it.title == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
-                && it.link == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O"
-                && it.main_image == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg"
+            if (it.getJSONProduct().getTitle() == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
+                && it.getJSONProduct().getLink() == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O"
+                && it.getJSONProduct().getJSONMain_Image().getImageLink() == "https://images-na.ssl-images-amazon.com/images/I/616baa8-DxL.jpg"
             ) {
                 chlorineCalled = true
             }
         }
-
         assertTrue(chlorineCalled)
     }
 
