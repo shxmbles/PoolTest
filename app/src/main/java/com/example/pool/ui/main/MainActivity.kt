@@ -1,22 +1,20 @@
 package com.example.pool.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pool.R
-import com.example.pool.dto.Chemical
-import com.example.pool.dto.Algae
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pool.R
+import com.example.pool.dto.Algae
+import com.example.pool.dto.Chemical
 import com.example.pool.dto.PoolResults
 import com.example.pool.dto.Product
-import com.example.pool.service.ProductService
-
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -73,20 +71,19 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-
-            val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-            Log.d("GetPost", viewModel.getPost().toString())
-            mvm.fetchProduct(myASIN = "B00PZZFG0O")
-            viewModel.product.observe(this, Observer {
-                Log.d("working", it.toString())
-                var mine = it
-                thisProduct = it
-                //Log.d("MainActivity", it.link + "Test")
-                //Log.d("MainActivity", it.title + "Test")
-            })
-        var prod: String
-        prod = thisProduct.toString()
+        //this will return an array of product objects to be used in recycler view
+        fun getAllProducts(poolResults: Array<PoolResults>): Array<Product?> {
+            var asins = generateASINList(poolResults = poolResults)
+            var productList = arrayOfNulls<Product>(asins.size)
+            var index = 0
+            asins.forEach { asin ->
+                mvm.fetchProduct(myASIN = asin)
+                mvm.product.observe(this, Observer {
+                    productList[index] = it
+                })
+            }
+            return productList
+        }
 
         submit_info.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
@@ -116,8 +113,8 @@ class MainActivity : AppCompatActivity() {
         return results
     }
 
-    private fun generateProductList(poolResults: Array<PoolResults>): List<String> {
-        var productList: ArrayList<String> = arrayListOf()
+    private fun generateASINList(poolResults: Array<PoolResults>): List<String> {
+        var asins: ArrayList<String> = arrayListOf()
         var asin: String = ""
         poolResults.forEach()
         {
@@ -132,9 +129,9 @@ class MainActivity : AppCompatActivity() {
                     asin = getASIN("phDecrease")
                 }
             }
-            productList.add(mvm.fetchProduct(getASIN(it.chemical.name)).toString())
+            asins.add(asin)
         }
-        return productList
+        return asins
     }
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {

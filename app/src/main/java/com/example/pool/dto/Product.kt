@@ -8,7 +8,19 @@ import com.google.gson.annotations.SerializedName
  * @property JSONProduct, an internal JSON item that contains further data
  * @constructor creates a producct based on supplied properties
  */
-public class Product(@SerializedName("product") private var JSONProduct: JSONProduct) {
+public class Product(@SerializedName("product") private var JSONProduct: JSONProduct, @SerializedName("buybox_winner") private var buyBox: BuyBox) {
+
+    public fun getBuyBox(): BuyBox {
+        return buyBox
+    }
+    public fun setBuyBox(buyBox: BuyBox) {
+        this.buyBox = buyBox
+    }
+    public fun getRaw() {
+        buyBox.getRaw()
+    }
+
+
 
     /**
      * @return JSONProduct object
