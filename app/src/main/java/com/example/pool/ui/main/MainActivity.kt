@@ -9,11 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
-import android.util.Log
 import android.widget.Spinner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.pool.service.ProductService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,26 +17,26 @@ class MainActivity : AppCompatActivity() {
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
 
-    val chlorine = Chemical(name= "Chlorine", okRange= arrayOf(1F, 5F), hoursCantSwim= 8F,
-        ozPerGallon= .0001F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
+    val chlorine = Chemical(name= "Chlorine", toAddName="Pool Shock", okRange= arrayOf(1F, 5F), currentLevel=0F, deviation=0F,
+        hoursCantSwim= 8F, ozPer10KGallon= .0001F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
-    val alkalinity = Chemical(name= "Alkalinity", okRange= arrayOf(80F, 120F), hoursCantSwim= 0F,
-        ozPerGallon= .0001F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
+    val alkalinity = Chemical(name= "Alkalinity", toAddName="Pool Shock", okRange= arrayOf(80F, 120F), currentLevel=0F, deviation=0F,
+        hoursCantSwim= 0F, ozPer10KGallon=  400F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
 
-    val calciumHardness = Chemical(name= "Calcium Hardness", okRange= arrayOf(200F, 300F), hoursCantSwim= 0F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
+    val calciumHardness = Chemical(name= "Calcium Hardness", toAddName="Pool Shock", okRange= arrayOf(200F, 300F),  currentLevel=0F, deviation=0F,
+        hoursCantSwim= 0F, ozPer10KGallon= .005F, ASINTiers= arrayOf("B000UVQUJ4", "B084GQH8YF", "B07QXTNV1B"))
 
-    val pHData = Chemical(name= "pH", okRange= arrayOf(7.4F, 7.6F), hoursCantSwim= 0F,
-        ozPerGallon= .0001F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
+    val pHData = Chemical(name= "pH", toAddName="Pool Shock", okRange= arrayOf(7.4F, 7.6F), currentLevel=0F, deviation=0F, hoursCantSwim= 0F,
+        ozPer10KGallon= .0001F, ASINTiers= arrayOf("B084GPWRBL", "B08PG4C2NQ", "B004WDVT6K","B084GPS6KR", "B077715Y9L", "B07YZPNWDL"))
 
-    val cyanuricAcid = Chemical(name= "Cyanuric Acid", okRange= arrayOf(30F, 100F), hoursCantSwim= 0F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
+    val cyanuricAcid = Chemical(name= "Cyanuric Acid", toAddName="Pool Shock", okRange= arrayOf(30F, 100F), currentLevel=0F, deviation=0F,
+        hoursCantSwim= 0F, ozPer10KGallon= .005F, ASINTiers= arrayOf("B00TNWGZE6", "B011AFBUTI", "B07FPZP6ZX"))
 
-    val tds = Chemical(name= "Total Dissolved Solids", okRange= arrayOf(0F, 1500F), hoursCantSwim= 0F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
+    val tds = Chemical(name= "Total Dissolved Solids", toAddName="Pool Shock", okRange= arrayOf(0F, 1500F), currentLevel=0F, deviation=0F,
+        hoursCantSwim= 0F, ozPer10KGallon= .005F, ASINTiers= arrayOf("N/A"))
 
-    val phos = Chemical(name= "Phosphates", okRange= arrayOf(0F, 100F), hoursCantSwim= 0F,
-        ozPerGallon= .005F, ASINTiers= arrayOf("N/A"))
+    val phos = Chemical(name= "Phosphates", toAddName="Pool Shock", okRange= arrayOf(0F, 100F), currentLevel=0F, deviation=0F,
+        hoursCantSwim= 0F, ozPer10KGallon= .005F, ASINTiers= arrayOf("N/A"))
 
     val greenAlgae = Algae(type= "Green", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B002WKJAYS")
     val yellowAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")

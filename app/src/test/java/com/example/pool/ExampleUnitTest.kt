@@ -19,7 +19,7 @@ class ExampleUnitTest {
     }
     @Test
     fun chemicalDTO_toStringFormat() {
-        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPerGallon=.5F, ASINTiers = arrayOf("ASIN1", "ASIN2", "ASIN3"))
+        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPer10KGallon=.5F, ASINTiers = arrayOf("ASIN1", "ASIN2", "ASIN3"))
         assertTrue(
             chemical.toString() == "example is a chemical with an acceptable range of 0 to 1" +
                     "and is unsafe for pool goers 1 hour after use."
@@ -37,13 +37,13 @@ class ExampleUnitTest {
     }
     @Test
     fun chemicalDTO_returnAmountAdd() {
-        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPerGallon=.5F, ASINTiers = arrayOf("ASIN1", "ASIN2", "ASIN3"))
+        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPer10KGallon=.5F, ASINTiers = arrayOf("ASIN1", "ASIN2", "ASIN3"))
         val amountNeeded = chemical.calculateAmountNeeded(50F)
         assertTrue(amountNeeded == 25F)
     }
     @Test
     fun chemicalDTO_returnAmountRemove() {
-        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPerGallon=.5F, ASINTiers = arrayOf("ASIN1", "ASIN2", "ASIN3"))
+        val chemical = Chemical(name="example", okRange=arrayOf(0F, 1F), hoursCantSwim=1F, ozPer10KGallon=.5F, ASINTiers = arrayOf("ASIN1", "ASIN2", "ASIN3"))
         val amountRemove = chemical.calculateAmountToRemove(50F)
         assertTrue(amountRemove == -25F)
     }
