@@ -11,6 +11,7 @@ import com.example.pool.R
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
 import android.util.Log
+import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -82,9 +83,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
+        val spinner: Spinner = findViewById(R.id.algaeDropdown)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(this, R.array.algae_array, R.layout.selected_item)
+            .also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
         val myProduct = MainViewModel().fetchProduct(myASIN="B00PZZFG0O")
-        Log.e("Beeleave", myProduct.toString())
         val icon = arrayOf<Int>(R.drawable.chlorine)
         val list = ArrayList<PoolStatusItem>()
 
