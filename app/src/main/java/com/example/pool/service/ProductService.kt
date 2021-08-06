@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.pool.RetrofitClientInstance
 import com.example.pool.dao.ProductDAO
 import com.example.pool.dto.Product
+import com.example.pool.ui.main.MainActivity
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.Call
@@ -16,12 +17,10 @@ class ProductService {
     /**
      * @return product from JSON data in MutableLiveData array list.
      */
-    fun fetchProduct(myASIN: String): String {
+    fun fetchProduct(myASIN: String): MutableLiveData<Product> {
         var _product = MutableLiveData<Product>()
         val service = RetrofitClientInstance.retrofitInstance?.create(ProductDAO::class.java)
-        Log.e("service", service.toString())
         val call = service?.getProduct(myASIN)
-        Log.e("call1", call.toString())
         call?.enqueue(object: Callback<Product> {
             override fun onFailure(call: Call<Product>, t: Throwable) {
                 val j = 1+1
@@ -33,8 +32,11 @@ class ProductService {
                 response: Response<Product>
             ) {
                 _product.value = response.body()
+                Log.e("response2", _product.value.toString())
             }
         })
-        return _product.value.toString()
+        Log.e("response", _product.value.toString())
+        return _product
     }
+
 }
