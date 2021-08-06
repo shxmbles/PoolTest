@@ -7,4 +7,11 @@
     <string name="pH">pH:</string>
     <string name="CyanuricAcid">Cyanuric Acid:</string>
     <string name="TotalDissolvedSolids">Total Dissolved Solids:</string>
+
+    <string-array name="algae_array">
+        <item>Clear</item>
+        <item>Green Algae</item>
+        <item>Yellow Algae</item>
+        <item>Black Algae</item>
+    </string-array>
 </resources>
