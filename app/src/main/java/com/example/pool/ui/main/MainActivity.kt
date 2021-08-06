@@ -10,12 +10,20 @@ import com.example.pool.R
 import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
 import android.widget.Spinner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.pool.dto.PoolResults
+import com.example.pool.dto.Product
+import com.example.pool.service.ProductService
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var submit_info: Button
+    var mvm: MainViewModel = MainViewModel()
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
+
 
     val chlorine = Chemical(name= "Chlorine", toAddName="Pool Shock", okRange= arrayOf(1F, 5F), currentLevel=0F, deviation=0F,
         hoursCantSwim= 8F, ozPer10KGallon= .0001F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
@@ -78,25 +86,46 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun clickSubmit(chemList: List<PoolStatusItem>): List<String>
+    private fun clickSubmit(chemList: List<PoolStatusItem>): List<PoolResults>
     {
-        var results = ArrayList<String>()
+        var results = ArrayList<PoolResults>()
 
         var index = 0
         chemList.forEach()
         {
-            if(chemList[index].poolStatus.toFloat() <= chemData[index].okRange[0] &&
-               chemList[index].poolStatus.toFloat() >= chemData[index].okRange[1]) {
+            if(chemList[index].poolStatus.toFloat() >= chemData[index].okRange[0] &&
+               chemList[index].poolStatus.toFloat() <= chemData[index].okRange[1]) {
                 val paragraph = chemData[index].reportString(true)
-                results += paragraph
+                results += PoolResults(paragraph, chemData[index])
             }
             else
             {
-                val amountNeeded = chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize))
+                results += PoolResults("says it's not good amount", chemData[index], chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize)))
             }
             index += 1
         }
         return results
+    }
+
+    private fun generateProductList(poolResults: Array<PoolResults>): List<String> {
+        var productList: ArrayList<String> = arrayListOf()
+        var asin: String = ""
+        poolResults.forEach()
+        {
+            if (it.amountNeeded != 0F && it.chemical.name != "pH") {
+                asin = getASIN(it.chemical.name)
+            }
+            else if (it.amountNeeded != 0F) {
+                if (it.amountNeeded > 0F) {
+                    asin = getASIN("phIncrease")
+                }
+                else {
+                    asin = getASIN("phDecrease")
+                }
+            }
+            productList.add(mvm.fetchProduct(getASIN(it.chemical.name)).toString())
+        }
+        return productList
     }
 
     private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
@@ -135,7 +164,8 @@ class MainActivity : AppCompatActivity() {
      * @param productType is the chemical name ("chlorine", "cyanuricAcid", "phIncrease", "phDecrease", "algaecide", "calcium", "sodiumBicarbonate")
      * @return the asin of the product which we will fetch from the amazon api
      */
-    public fun getASIN(priceLevel: Int, productType: String) : String {
+    public fun getASIN(productType: String) : String {
+        val priceLevel = 1
         when (productType) {
             "chlorine" -> return chlorine.ASINTiers[priceLevel]
             //5 lbs
