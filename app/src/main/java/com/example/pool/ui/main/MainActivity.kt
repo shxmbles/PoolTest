@@ -19,7 +19,7 @@ import com.example.pool.service.ProductService
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
     lateinit var submit_info: Button
     var mvm: MainViewModel = MainViewModel()
     //Chemicals used in pools declared
@@ -74,16 +74,17 @@ class MainActivity : AppCompatActivity() {
         recycler_view.setHasFixedSize(true)
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.myResponse.observe(this, Observer {
+        /*viewModel.myResponse.observe(this, Observer {
             Log.d("GetPost", mvm.getPost().toString())
             Log.d("MainActivity", it.link + "Test")
             Log.d("MainActivity", it.title + "Test")
-        })
+        })*/
 
-        submit_info.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(v: View?) {
+        submit_info.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
                 clickSubmit(exampleList)
             }
+
         })
     }
 
@@ -92,19 +93,24 @@ class MainActivity : AppCompatActivity() {
         var results = ArrayList<PoolResults>()
 
         var index = 0
-        chemList.forEach()
+        
+        Log.e("Hello?", "Can your hear me?")
+        /*chemList.forEach()
         {
+
             if(chemList[index].poolStatus.toFloat() >= chemData[index].okRange[0] &&
                chemList[index].poolStatus.toFloat() <= chemData[index].okRange[1]) {
                 val paragraph = chemData[index].reportString(true)
                 results += PoolResults(paragraph, chemData[index])
+                chemList[index].poolStatus = "45"
             }
             else
             {
+
                 results += PoolResults("says it's not good amount", chemData[index], chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize)))
             }
             index += 1
-        }
+        }*/
         return results
     }
 
