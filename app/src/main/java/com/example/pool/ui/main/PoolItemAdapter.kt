@@ -30,7 +30,6 @@ class PoolItemAdapter(private val poolList: List<PoolStatusItem>): RecyclerView.
         holder.status.text = currentItem.poolStatus
     }
 
-
     override fun getItemCount() = poolList.size
 
     class PoolItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

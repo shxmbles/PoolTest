@@ -1,23 +1,23 @@
 package com.example.pool.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
-import com.example.pool.dto.Chemical
 import com.example.pool.dto.Algae
-import android.widget.Spinner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.example.pool.dto.Chemical
 import com.example.pool.dto.PoolResults
-import com.example.pool.dto.Product
-import com.example.pool.service.ProductService
-
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.recycler_view
+import kotlinx.android.synthetic.main.results.*
 
 class MainActivity : AppCompatActivity()  {
     lateinit var submit_info: Button
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity()  {
     val yellowAlgae = Algae(type= "Yellow", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B01LW1QNZ7")
     val blackAlgae = Algae(type= "Black", hoursCantSwim= 0F, ozPerGallon= 0F, chlBoostPerGallon= 0F, ASINTag = "B00BGNLPCW")
 
-
+    val exampleList = generatePoolStatusList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,43 +70,48 @@ class MainActivity : AppCompatActivity()  {
                 spinner.adapter = adapter
             }
 
-        val exampleList = generatePoolStatusList(2)
+
         recycler_view.adapter = PoolItemAdapter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
         submit_info.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(v: View?) {
-                clickSubmit(exampleList)
+            override fun onClick(v: View) {
+                hideKeyboard(recycler_view.rootView)
+                val handler = Handler()
+                handler.postDelayed(Runnable {clickSubmit(exampleList)}, 500)
             }
         })
     }
 
+    private fun hideKeyboard(v: View) {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(v.applicationWindowToken, 0)
+
+    }
+
     private fun clickSubmit(chemList: List<PoolStatusItem>): List<PoolResults>
     {
+
         var results = ArrayList<PoolResults>()
         var index = 0
-
         chemList.forEach()
         {
             try {
-                if (PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString()
-                        .toFloat() >= chemData[index].okRange[0] &&
-                    PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString()
-                        .toFloat() <= chemData[index].okRange[1]
+                if (PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString().toFloat() >= chemData[index].okRange[0] &&
+                    PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString().toFloat() <= chemData[index].okRange[1]
                 ) {
-                    val paragraph = chemData[index].reportString(true)
-                    results += PoolResults(paragraph, chemData[index], 0F, index)
+                    //val paragraph = chemData[index].reportString(true)
+                    //results += PoolResults(paragraph, chemData[index], 0F, index)
+                    Log.i("In Range", PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString())
                 }
                 else {
-                    Log.e("OutOfRange", PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString())
-                    Log.e("OutOfRange", chemData[index].okRange[0].toString() + ", " + chemData[index].okRange[1].toString())
+                    Log.i("Out of Range", PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString())
                 }
             }
             catch (e: NumberFormatException)
             {
-
-                Log.e("Error", "No input given")
+                Log.i("AKSIS","An error has occurred")
             }
             index += 1
         }
@@ -140,7 +145,7 @@ class MainActivity : AppCompatActivity()  {
         return asins
     }
 
-    fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
+    fun generatePoolStatusList(): List<PoolStatusItem> {
 
         val icon = arrayOf(R.drawable.chlorine, R.drawable.alkalinity, R.drawable.calcium, R.drawable.ph, R.drawable.cacid, R.drawable.solid, R.drawable.phosphates)
         val list = ArrayList<PoolStatusItem>()
