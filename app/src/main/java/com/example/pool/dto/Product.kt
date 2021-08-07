@@ -25,8 +25,8 @@ public class Product(@SerializedName("product") private var JSONProduct: JSONPro
     /**
      * @return raw from JSONProduct object
      */
-    public fun getRaw() {
-        buyBox.getRaw()
+    public fun getRaw(): String {
+        return buyBox.getRaw()
     }
 
     /**

@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()  {
     lateinit var submit_info: Button
+    var results: List<PoolResults> = listOf()
+
     var mvm: MainViewModel = MainViewModel()
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
@@ -73,18 +75,10 @@ class MainActivity : AppCompatActivity()  {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        /*viewModel.myResponse.observe(this, Observer {
-            Log.d("GetPost", mvm.getPost().toString())
-            Log.d("MainActivity", it.link + "Test")
-            Log.d("MainActivity", it.title + "Test")
-        })*/
-
-        submit_info.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
+        submit_info.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
                 clickSubmit(exampleList)
             }
-
         })
     }
 
@@ -92,6 +86,7 @@ class MainActivity : AppCompatActivity()  {
     {
         var results = ArrayList<PoolResults>()
         var index = 0
+
         chemList.forEach()
         {
             try {
@@ -101,7 +96,7 @@ class MainActivity : AppCompatActivity()  {
                         .toFloat() <= chemData[index].okRange[1]
                 ) {
                     val paragraph = chemData[index].reportString(true)
-                    results += PoolResults(paragraph, chemData[index])
+                    results += PoolResults(paragraph, chemData[index], 0F, index)
                 }
                 else {
                     Log.e("OutOfRange", PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString())
@@ -110,15 +105,22 @@ class MainActivity : AppCompatActivity()  {
             }
             catch (e: NumberFormatException)
             {
+
                 Log.e("Error", "No input given")
             }
             index += 1
         }
+        this.results = results
         return results
     }
 
-    private fun generateProductList(poolResults: Array<PoolResults>): List<String> {
-        var productList: ArrayList<String> = arrayListOf()
+    @JvmName("getResults1")
+    public fun getResults(): List<PoolResults> {
+        return results
+    }
+
+    fun generateASINList(poolResults: Array<PoolResults>): List<String> {
+        var asins: ArrayList<String> = arrayListOf()
         var asin: String = ""
         poolResults.forEach()
         {
@@ -133,12 +135,12 @@ class MainActivity : AppCompatActivity()  {
                     asin = getASIN("phDecrease")
                 }
             }
-            productList.add(mvm.fetchProduct(getASIN(it.chemical.name)).toString())
+            asins.add(asin)
         }
-        return productList
+        return asins
     }
 
-    private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
+    fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
 
         val icon = arrayOf(R.drawable.chlorine, R.drawable.alkalinity, R.drawable.calcium, R.drawable.ph, R.drawable.cacid, R.drawable.solid, R.drawable.phosphates)
         val list = ArrayList<PoolStatusItem>()
