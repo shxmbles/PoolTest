@@ -21,11 +21,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()  {
     lateinit var submit_info: Button
-    var results: List<PoolResults> = listOf()
 
     var mvm: MainViewModel = MainViewModel()
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
+    var poolStatusList: List<PoolStatusItem> = listOf()
+    var results: List<PoolResults> = listOf()
 
 
     val chlorine = Chemical(name= "Chlorine", toAddName="Pool Shock", okRange= arrayOf(1F, 5F), currentLevel=0F, deviation=0F,
@@ -75,14 +76,14 @@ class MainActivity : AppCompatActivity()  {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-        submit_info.setOnClickListener(object: View.OnClickListener{
+        submit_info.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
                 clickSubmit(exampleList)
             }
         })
     }
 
-    private fun clickSubmit(chemList: List<PoolStatusItem>): List<PoolResults>
+    fun clickSubmit(chemList: List<PoolStatusItem>): List<PoolResults>
     {
         var results = ArrayList<PoolResults>()
         var index = 0
@@ -166,6 +167,7 @@ class MainActivity : AppCompatActivity()  {
         val phosphates = PoolStatusItem(imageResource = icon[6], "Phosphates", "Safe Range: 0-100", "")
         list += phosphates
         chemData += phos
+        poolStatusList = list
         return list
     }
 
