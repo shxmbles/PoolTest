@@ -20,7 +20,6 @@ class ProductActivity: AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-        }
     }
 
     private var myArray = arrayOfNulls<ProductAndImage>(7)
@@ -48,3 +47,4 @@ class ProductActivity: AppCompatActivity() {
         }
         return index
     }
+}
