@@ -17,9 +17,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var submit_info: Button
-    var mvm: MainViewModel = MainViewModel()
+    var results: List<PoolResults> = listOf()
 
-    var productArray = arrayOfNulls<Product>(7)
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
 
@@ -71,19 +70,6 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-        //this will return an array of product objects to be used in recycler view
-        fun getAllProducts(poolResults: List<PoolResults>): Int {
-            var asins = generateASINList(poolResults = poolResults.toTypedArray())
-            var index = 0
-            asins.forEach { asin ->
-                mvm.fetchProduct(myASIN = asin)
-                mvm.product.observe(this, Observer {
-                    productArray[index] = it
-                })
-            }
-            return index
-        }
-
         submit_info.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 clickSubmit(exampleList)
@@ -101,18 +87,24 @@ class MainActivity : AppCompatActivity() {
             if(chemList[index].poolStatus.toFloat() >= chemData[index].okRange[0] &&
                chemList[index].poolStatus.toFloat() <= chemData[index].okRange[1]) {
                 val paragraph = chemData[index].reportString(true)
-                results += PoolResults(paragraph, chemData[index])
+                results += PoolResults(paragraph, chemData[index], 0F, chemList[index].imageResource)
             }
             else
             {
-                results += PoolResults("says it's not good amount", chemData[index], chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize)))
+                results += PoolResults("says it's not good amount", chemData[index], chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize)), chemList.get(index).imageResource)
             }
             index += 1
         }
+        this.results = results
         return results
     }
 
-    private fun generateASINList(poolResults: Array<PoolResults>): List<String> {
+    @JvmName("getResults1")
+    public fun getResults(): List<PoolResults> {
+        return results
+    }
+
+    fun generateASINList(poolResults: Array<PoolResults>): List<String> {
         var asins: ArrayList<String> = arrayListOf()
         var asin: String = ""
         poolResults.forEach()
@@ -133,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         return asins
     }
 
-    private fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
+    fun generatePoolStatusList(size: Int) : List<PoolStatusItem> {
 
         val icon = arrayOf(R.drawable.chlorine, R.drawable.alkalinity, R.drawable.calcium, R.drawable.ph, R.drawable.cacid, R.drawable.solid, R.drawable.phosphates)
         val list = ArrayList<PoolStatusItem>()
