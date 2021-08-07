@@ -12,7 +12,7 @@
 
 
         <TextView
-            android:id="@+id/Chemical"
+            android:id="@+id/chemlbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -21,10 +21,10 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/Report"
+            android:id="@+id/reportlbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Chemical"
+            android:layout_below="@id/chemlbl"
             android:fontFamily="sans-serif-black"
             android:text="Report"
             android:textColor="#000000"
