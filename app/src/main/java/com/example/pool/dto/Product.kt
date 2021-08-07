@@ -6,9 +6,28 @@ import com.google.gson.annotations.SerializedName
  * A Product
  *
  * @property JSONProduct, an internal JSON item that contains further data
- * @constructor creates a producct based on supplied properties
+ * @constructor creates a product based on supplied properties
  */
-public class Product(@SerializedName("product") private var JSONProduct: JSONProduct) {
+public class Product(@SerializedName("product") private var JSONProduct: JSONProduct, @SerializedName("buybox_winner") private var buyBox: BuyBox) {
+
+    /**
+     * @return buyBox object
+     */
+    public fun getBuyBox(): BuyBox {
+        return buyBox
+    }
+    /**
+     * @param buyBox sets this.buyBox
+     */
+    public fun setBuyBox(buyBox: BuyBox) {
+        this.buyBox = buyBox
+    }
+    /**
+     * @return raw from JSONProduct object
+     */
+    public fun getRaw() {
+        buyBox.getRaw()
+    }
 
     /**
      * @return JSONProduct object
@@ -26,13 +45,13 @@ public class Product(@SerializedName("product") private var JSONProduct: JSONPro
      * @return title
      */
     fun getTitle(): String {
-        return this.JSONProduct.getTitle()
+        return JSONProduct.getTitle()
     }
     /**
      * @return link
      */
     fun getLink(): String {
-        return this.JSONProduct.getLink()
+        return JSONProduct.getLink()
     }
     /**
      * @override toString function
@@ -40,7 +59,7 @@ public class Product(@SerializedName("product") private var JSONProduct: JSONPro
      */
     @Override
     override fun toString(): String {
-        return JSONProduct.getTitle() + " is available for purchase on Amazon at: " + JSONProduct.getLink();
+        return getTitle() + " is available for purchase on Amazon at: " + getLink() + ". It costs " + getRaw() + ".";
     }
 
 }
