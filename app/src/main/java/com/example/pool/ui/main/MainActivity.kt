@@ -1,24 +1,29 @@
 package com.example.pool.ui.main
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pool.R
-import com.example.pool.dto.Algae
 import com.example.pool.dto.Chemical
+import com.example.pool.dto.Algae
+import android.widget.Spinner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.pool.dto.PoolResults
 import com.example.pool.dto.Product
+import com.example.pool.service.ProductService
+
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
     lateinit var submit_info: Button
     var results: List<PoolResults> = listOf()
 
+    var mvm: MainViewModel = MainViewModel()
     //Chemicals used in pools declared
     val chemData = ArrayList<Chemical>()
 
@@ -82,11 +87,16 @@ class MainActivity : AppCompatActivity() {
         var results = ArrayList<PoolResults>()
 
         var index = 0
-        chemList.forEach()
+
+        Log.e("Hello?", "Can your hear me?")
+        /*chemList.forEach()
         {
+
             if(chemList[index].poolStatus.toFloat() >= chemData[index].okRange[0] &&
                chemList[index].poolStatus.toFloat() <= chemData[index].okRange[1]) {
                 val paragraph = chemData[index].reportString(true)
+                results += PoolResults(paragraph, chemData[index])
+                chemList[index].poolStatus = "45"
                 results += PoolResults(paragraph, chemData[index], 0F, chemList[index].imageResource)
             }
             else
@@ -96,6 +106,7 @@ class MainActivity : AppCompatActivity() {
             index += 1
         }
         this.results = results
+        }*/
         return results
     }
 

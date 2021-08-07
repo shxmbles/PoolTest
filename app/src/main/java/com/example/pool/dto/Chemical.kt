@@ -7,6 +7,8 @@ package com.example.pool.dto
  * @property toAddName, name to the product used to change the chemical's level.
  * @property okRange, an array of two floats with index 0 being the lowest acceptable value and index
  * 1 being the highest
+ * @property deviation, the value ozPer10KGallon multiplied by poolSize will shift the chemical level
+ * @property currentLevel, the chemical's level as specified by the user
  * @property hoursCantSwim, number of hours it is unsafe to swim per oz (could be other unit of measure)
  * of chemical added
  * @property ozPer10KGallon, ounces of chemical needed per gallon of pool water. Again, can adjust units
@@ -28,7 +30,7 @@ class Chemical(val name: String, val toAddName: String, val okRange: Array<Float
         {
             deviationHolder = (currentLevel - okRange[1]) / deviation
         }
-        amountNeeded = ozPer10KGallon * (poolSize/10000)
+        amountNeeded = ozPer10KGallon * (poolSize/10000) * deviationHolder
         return amountNeeded
     }
 
