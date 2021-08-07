@@ -91,26 +91,29 @@ class MainActivity : AppCompatActivity()  {
     private fun clickSubmit(chemList: List<PoolStatusItem>): List<PoolResults>
     {
         var results = ArrayList<PoolResults>()
-
         var index = 0
-        
-        Log.e("Hello?", "Can your hear me?")
-        /*chemList.forEach()
+        chemList.forEach()
         {
-
-            if(chemList[index].poolStatus.toFloat() >= chemData[index].okRange[0] &&
-               chemList[index].poolStatus.toFloat() <= chemData[index].okRange[1]) {
-                val paragraph = chemData[index].reportString(true)
-                results += PoolResults(paragraph, chemData[index])
-                chemList[index].poolStatus = "45"
+            try {
+                if (PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString()
+                        .toFloat() >= chemData[index].okRange[0] &&
+                    PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString()
+                        .toFloat() <= chemData[index].okRange[1]
+                ) {
+                    val paragraph = chemData[index].reportString(true)
+                    results += PoolResults(paragraph, chemData[index])
+                }
+                else {
+                    Log.e("OutOfRange", PoolItemAdapter.PoolItemViewHolder(recycler_view).status.text.toString())
+                    Log.e("OutOfRange", chemData[index].okRange[0].toString() + ", " + chemData[index].okRange[1].toString())
+                }
             }
-            else
+            catch (e: NumberFormatException)
             {
-
-                results += PoolResults("says it's not good amount", chemData[index], chemData[index].calculateAmountNeeded(findViewById(R.id.PoolSize)))
+                Log.e("Error", "No input given")
             }
             index += 1
-        }*/
+        }
         return results
     }
 
