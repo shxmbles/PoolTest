@@ -5,7 +5,6 @@ import com.example.pool.dto.JSONProduct
 import com.example.pool.dto.Product
 import com.example.pool.ui.main.MainViewModel
 import org.junit.Test
-import android.util.Log
 import com.example.pool.dto.BuyBox
 import com.example.pool.dto.Price
 import org.junit.Assert.*
@@ -27,7 +26,7 @@ class ProductDataIntegrationTest {
     fun confirmChlorine_outputsChlorine () {
         val product = Product(JSONProduct(title="Chlorine", link="https://link"), buyBox= BuyBox(Price("$0.00")
         ) )
-        assertEquals("Chlorine is available for purchase on Amazon at: https://link", product.toString())
+        assertEquals("Chlorine is available for purchase on Amazon at: https://link. It costs $0.00.", product.toString())
     }
 
     @Test
@@ -54,10 +53,9 @@ class ProductDataIntegrationTest {
             if (it.getTitle() == "CLOROX Pool&Spa XtraBlue 3-Inch Long Lasting Chlorinating Tablets, 5-Pound Chlorine"
                 && it.getLink() == "https://www.amazon.com/CLOROX-Pool-Spa-XtraBlue-Chlorinating/dp/B00PZZFG0O") {
                 chlorineCalled = true
+                assertTrue(chlorineCalled)
             }
-            assertTrue(chlorineCalled)
         }
     }
-
 }
 

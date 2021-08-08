@@ -1,6 +1,5 @@
 package com.example.pool.service
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.pool.RetrofitClientInstance
 import com.example.pool.dao.ProductDAO
@@ -32,10 +31,8 @@ class ProductService {
                 response: Response<Product>
             ) {
                 _product.value = response.body()
-                Log.e("response2", _product.value.toString())
             }
         })
-        Log.e("response", _product.value.toString())
         return _product
     }
 
