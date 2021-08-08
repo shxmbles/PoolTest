@@ -56,13 +56,11 @@ Chemical: Noun class that represents various pool chemicals.
 
 <h2>ROLES</h2>
 
-DevOps/Product Owner/Scrum Master: Howie Hall
+DevOps/Product Owner: Howie Hall
 <br>
-Frontend Developer: Katie Dipaola
+Integration Specialist: Katie Dipaola
 <br>
-Frontend Inegration Specialist: Hasseb Ikram
-<br>
-Integration Developer: Blake Warner, Alexander Pugh
+UI Specialist: Blake Warner, Alexander Pugh
 <br>
 
 
