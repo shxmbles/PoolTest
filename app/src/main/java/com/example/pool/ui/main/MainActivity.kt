@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity()  {
 
 
     val chlorine = Chemical(name= "Chlorine", toAddName="Pool Shock", okRange= arrayOf(1F, 5F), currentLevel=0F, deviation=0F,
-        hoursCantSwim= 8F, ozPer10KGallon= .0001F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
+        hoursCantSwim= 8F, ozPer10KGallon= 1F, ASINTiers= arrayOf("B096N1N5DJ", "B00PZZFG0O", "B08QMW3XJV"))
 
     val alkalinity = Chemical(name= "Alkalinity", toAddName="Pool Shock", okRange= arrayOf(80F, 120F), currentLevel=0F, deviation=0F,
         hoursCantSwim= 0F, ozPer10KGallon=  400F, ASINTiers= arrayOf("B076KSBF69", "B0774M73SF", "B073H1NJKK"))
@@ -104,17 +104,19 @@ class MainActivity : AppCompatActivity()  {
                 if (PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString().toFloat() >= chemData[index].okRange[0] &&
                     PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString().toFloat() <= chemData[index].okRange[1]
                 ) {
-                    //val paragraph = chemData[index].reportString(true)
-                    //results += PoolResults(paragraph, chemData[index], 0F, index)
-                    Log.i("In Range", PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString())
+                    results += PoolResults(chemData[index].reportString(true), chemData[index], 0F, index)
+                    Log.i("In Range", chemData[index].reportString(true))
                 }
                 else {
-                    Log.i("Out of Range", PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString())
+                    chemData[index].currentLevel = PoolItemAdapter.PoolItemViewHolder(recycler_view[index]).status.text.toString().toFloat()
+                    chemData[index].amountNeeded = chemData[index].calculateAmountNeeded(PoolSize.text.toString().toFloat())
+                    results += PoolResults(chemData[index].reportString(false), chemData[index], chemData[index].amountNeeded, index)
+                    Log.i("Out of Range", chemData[index].calculateAmountNeeded(PoolSize.text.toString().toFloat()).toString())
                 }
             }
             catch (e: NumberFormatException)
             {
-                Log.i("AKSIS","An error has occurred")
+                Log.i("AKSIS",chemData[index].reportString(false))
             }
             index += 1
         }

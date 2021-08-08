@@ -19,7 +19,7 @@ package com.example.pool.dto
 class Chemical(val name: String, val toAddName: String, val okRange: Array<Float>, val deviation: Float,
                var currentLevel: Float, val hoursCantSwim: Float, val ozPer10KGallon: Float, val ASINTiers: Array<String>) {
     /**
-     * @param poolSize is the current level of a certain chemical
+     * @param poolSize is the size of the pool in gallons
      * @return amount of chemical that needs to be added, or zero for none. a negative number
      * represents having too much of a chemical, and needing to avoid adding it
      */
@@ -61,16 +61,16 @@ class Chemical(val name: String, val toAddName: String, val okRange: Array<Float
         }
 
         if (canSwim == false) {
-            return this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
-                    this.okRange[1].toString() + ", and your levels are unsafe for pool goers. Add " +
+            return this.name + " is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
+                    this.okRange[1].toString() + ", and your levels are unstable for swimming. Add " +
                     amountNeeded + " " + chemAmount + " of " + toAddName +
                     " to your pool as instructed by the directions on the packaging and wait to swim for " +
                     hoursCantSwim + hour + " after use."
         }
         else
         {
-            return this.name + "is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
-            this.okRange[1].toString() + ", and is safe for pool goers."
+            return this.name + " is a chemical with an acceptable range of " + this.okRange[0].toString() + " to " +
+            this.okRange[1].toString() + ". Your level is in a stable range."
         }
     }
 }

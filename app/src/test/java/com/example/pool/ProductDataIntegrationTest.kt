@@ -6,6 +6,8 @@ import com.example.pool.dto.Product
 import com.example.pool.ui.main.MainViewModel
 import org.junit.Test
 import android.util.Log
+import com.example.pool.dto.BuyBox
+import com.example.pool.dto.Price
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.rules.TestRule
@@ -23,7 +25,8 @@ class ProductDataIntegrationTest {
 
     @Test
     fun confirmChlorine_outputsChlorine () {
-        val product = Product(JSONProduct(title="Chlorine", link="https://link"))
+        val product = Product(JSONProduct(title="Chlorine", link="https://link"), buyBox= BuyBox(Price("$0.00")
+        ) )
         assertEquals("Chlorine is available for purchase on Amazon at: https://link", product.toString())
     }
 
